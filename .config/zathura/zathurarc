@@ -1,0 +1,48 @@
+#Zathura light theme
+
+set font			"monospace 15"
+
+set default-bg                  "#2d2d2d" #06
+set default-fg                  "#ffffff" #01
+
+set statusbar-fg                "#f0f0f0" #02
+set statusbar-bg                "#383838" #04
+
+set inputbar-bg                 "#2d2d2d" # currently not used
+set inputbar-fg                 "#d8d8d8" #02
+
+set notification-error-bg       "#AC4142" #08
+set notification-error-fg       "#E0E0E0" #06
+
+set notification-warning-bg     "#AC4142" #08
+set notification-warning-fg     "#E0E0E0" #06
+
+set highlight-color             "#F4BF75" #0A
+set highlight-active-color      "#91ba5c" #08
+set highlight-transparenct	"0.6"
+
+set completion-highlight-fg     "#D0D0D0" #05
+set completion-highlight-bg     "#AB4642" #0C
+
+set completion-bg               "#2f2f2f" #05
+set completion-fg               "#ffffff" #0C
+set n-completion-items 		"20"
+
+set notification-bg             "#90A959" #0B
+set notification-fg             "#F5F5F5" #07
+
+set recolor-lightcolor          "#E0E0E0" #06
+set recolor-darkcolor           "#303030" #02
+set recolor                     "true"
+
+set page-padding		"3"
+#Size
+set widnow-height "1150"
+set window-width "1100"
+#mapping
+
+
+#other config
+set incremental-search
+
+set scroll-set "60"

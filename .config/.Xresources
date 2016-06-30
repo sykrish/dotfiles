@@ -1,0 +1,61 @@
+Xcursor.theme: DMZ-White
+
+URxvt.font:		xft:DejaVu Sans Mono for Powerline:size=12
+URxvt.boldFont:		xft:DejaVu Sans Mono for Powerline:size=10:bold
+URxvt.italicFont:	xft:DejaVu Sans Mono for Powerline:size=10:italic
+URxvt.boldItalicFont:	xft:DejaVu Sans Mono for Powerline:size=10:bold:italic
+URxvt.letterSpace:	-1
+
+
+! vim: ft=xdefaults
+
+*background: #1B1B1E
+*foreground: #FFFFFF
+
+!black
+ *color0: #282A2E
+ *color8: #373B41
+! red
+ *color1: #A54242
+ *color9: #CC6666
+! green
+ *color2: #8C9440
+ *color10: #B5BD68
+! yellow
+ *color3: #DE935F
+ *color11: #F0C674
+! blue
+ *color4: #5F819D
+ *color12: #81A2BE
+! magenta
+ *color5: #85678F
+ *color13: #B294BB
+! cyan
+ *color6: #5E8D87
+ *color14: #8ABEB7
+! white
+ *color7: #ffffff
+ *color15: #ffffff
+
+
+URxvt.internalBorder:      0
+URxvt.externalBorder:      0
+URxvt.scrollstyle:	   plain
+URxvt.scrollBar:           True
+URxvt.thickness:  	   5
+URxvt.scrollBar_right:	   True
+URxvt.scrollColor:	   #2e333e
+URxvt.secondaryScroll:     True
+
+!URxvt*fading:              30
+
+URxvt.perl-ext-common:     default,matcher,fullscreen 
+URxvt.keysym.F11:          perl:fullscreen:switch
+
+!URxvt.resize-font.smaller: C-Down
+!URxvt.resize-font.bigger:  C-Up
+
+URxvt.url-launcher:        /usr/bin/luakit
+URxvt.keysym.M-Delete:     perl:matcher:list
+URxvt.matcher.button:	   1
+URxvt.colorUL:             #A1B56C
