@@ -1,0 +1,45 @@
+[user]
+	name = Stefan van Delft
+	email = stefan.van.delft@bettyblocks.com
+[core]
+	editor = vim
+	excludesfile = /Users/stefanvandelft/.gitignore_global
+[color]
+	#ui = true
+[alias]
+ 	alias = config --get-regexp alias
+  a = add
+	pl = pull
+	co = checkout
+	b = branch
+	ci = commit
+	st = status
+	tree  =  "!git log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s' --abbrev-commit --all"
+	d = difftool
+	changes = show --stat --oneline
+[commit]
+	template = /Users/stefanvandelft/.gitmessage.txt
+[pager]
+	branch = false
+	alias = false
+	diff = false
+  stash = false
+[diff]
+	tool = vimdiff
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+[color "status"]
+	added = green
+	changed = red bold
+	untracked = magenta bold
+[color "diff"]
+	added = green
+	changed = red bold
+	untracked = magenta bold
+[color "branch"]
+	remote = yellow
+[difftool]
+	prompt = false
