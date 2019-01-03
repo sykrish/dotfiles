@@ -1,180 +1,241 @@
-set nocompatible
-filetype off
+" Basic config
+syntax on
+set nu rnu
+:set colorcolumn=120
 
-"Set the runtime path to include Vundle and initialze
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Plugins
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdtree'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'majutsushi/tagbar'
-Plugin 'chriskempson/base16-vim'
-Plugin 'tclem/vim-arduino'
-Plugin 'sudar/vim-arduino-syntax'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'universal-ctags/ctags'
+Plug 'elixir-editors/vim-elixir'
+Plug 'mhinz/vim-mix-format'
+Plug 'janko-m/vim-test'
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'unblevable/quick-scope'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
+Plug 'gregsexton/gitv'
+Plug 'justinmk/vim-sneak'
+Plug 'craigemery/vim-autotag'
+Plug 'int3/vim-extradite'
+"Plug 'Mizuchi/vim-ranger'
+Plug 'francoiscabrol/ranger.vim'
 
-"All of the plugins must be added before the following line 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 
+set mouse=a
 
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
+" Quickscope colour settings
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+nnoremap <leader>h :QuickScopeToggle <CR>
+"Mapping
+" Ctrlp
+"map ; :Files<CR>
+"Use TAB to complete when typing words, else inserts TABs as usual.
+"Uses dictionary and source files to find matching words to complete.
 
+"See help completion for source,
+"Note: usual completion is on <C-n> but more trouble to press all the time.
+"Never type the same word twice and maybe learn a new spellings!
+"Use the Linux dictionary when spelling is in doubt.
+"Window users can copy the file to their machine.
+function! Tab_Or_Complete()
+  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-N>"
+  else
+    return "\<Tab>"
+  endif
+endfunction
+:inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+:set dictionary="/usr/dict/words
 
+" FZF
+nmap <c-p> :cclose<CR>:FZF<CR>
+"nmap <m-p> :execute ':FZF -q '.shellescape(expand('<cword>'))<CR>
+nmap <c-o> :cclose<CR>:Tags<CR>
+nmap <m-o> :execute ':Tags '.expand('<cword>')<CR>
+nmap <c-i> :cclose<CR>:BLines<CR>
+map :ls :Buffers
 
-"color & shit
-syntax enable
-colorscheme hybrid
-set bg=dark
-set cursorline
+autocmd VimEnter * command! -bang -nargs=* FZF
+  \ call fzf#vim#files(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%:hidden', '?')
+  \                         : fzf#vim#with_preview('right:50%', '?'),
+  \                 <bang>0)
+autocmd VimEnter * command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%:hidden', '?')
+  \                         : fzf#vim#with_preview('right:50%', '?'),
+  \                 <bang>0)
 
+" Sneak (search 2 letters)
+map S <Plug>Sneak_s
 
-
-"Powerline conf
-set laststatus=2
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='dark'
-let g:airline_powerline_fonts = 1
-
-    let g:airline_symbols = {} 
-
-    let g:airline#extensions#whitespace#enabled = 0
-    let g:airline#extensions#whitespace#show_message = 0
-  " unicode symbols
-  let g:airline_left_sep = '»'
-  let g:airline_left_sep = '▶'
-  let g:airline_right_sep = '«'
-  let g:airline_right_sep = '◀'
-  let g:airline_symbols.crypt = '🔒'
-  let g:airline_symbols.linenr = '␊'
-  let g:airline_symbols.linenr = '␤'
-  let g:airline_symbols.linenr = '¶'
-  let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.paste = 'ρ'
-  let g:airline_symbols.paste = 'Þ'
-  let g:airline_symbols.paste = '∥'
-  let g:airline_symbols.spell = 'Ꞩ'
-  let g:airline_symbols.notexists = '∄'
-  let g:airline_symbols.whitespace = 'Ξ'
-
-  " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
-" Basic settings 
-set copyindent
-set incsearch
-set smarttab
-set number
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
-
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-  autocmd StdinReadPre * let s:std_in=1
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  " Also don't do it when the mark is in the first line, that is the default
-  " position when opening a file.
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-
-  augroup END
-
-else
-
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
-endif
-
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
-map <C-n> :NERDTreeToggle<CR>
+" tagbar
 nmap <F8> :TagbarToggle<CR>
-nmap <F7> :Latexmk<CR>
 
-"C: Comment shortcut BLOCK
-nnoremap <leader>cb :center 80<CR>hhv0r#A<SPACE><ESC>40A#<ESC>d80<BAR>YppVr#kk.
-"C: Comment line
-nnoremap <leader>cl 0i/*<ESC>A*/<ESC>
+" Remap code completion to Ctrl+Space {{{2
+inoremap <Nul> <C-n>
 
-"Window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <F3> :set hlsearch!<CR>
+" Split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Ctagsder
+"nnoremap <C-I> :BLines<CR>
+nnoremap <Leader-K> :Tags<CR>
+nnoremap <Leader-P> :Files<CR>
+" nnoremap <C-P> :execute ':FZF -q '.shellescape(expand('<cword>'))<CR>
+
+" FZF settings
+"let g:fzf --preview 'cat {}'
+
+map :dt :diffthis
+map :do :diffoff
+
+map <leader>s :nohlsearch<CR>
+
+map <F5> :Ranger <CR>
+map <leader><F5> :e! .<CR>
+
+" Tagbar settings
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 'functions:functions',
+        \ 'c:callbacks',
+        \ 'd:delegates',
+        \ 'e:exceptions',
+        \ 'i:implementations',
+        \ 'a:macros',
+        \ 'o:operators',
+        \ 'm:modules',
+        \ 'p:protocols',
+        \ 'r:records',
+        \ 't:tests'
+    \ ]
+\ }
+
+" Zoom on search results
+nnoremap n nzz
+nnoremap N Nzz
+
+"Show tabs as 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+"Show tabs and trailing spaces
+"set listchars=tab:^|,trail:~
+set list listchars=tab:\|\ ,trail:·,extends:»,precedes:«
+set list
+
+"Strip trailing whitespace on save
+autocmd BufWritePre *.ex,*.iex,*.exs,*.skim,*.ejs,*.coffee,*.php,*.rb,*.erb,*.haml,*.slim,*.sass,*.js,*.hamlc :%s/\s\+$//e
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained * set number relativenumber
+  autocmd BufLeave,FocusLost   * set number norelativenumber
+augroup END
+
+" Disable backing up
+"set nobackup
+"set nowritebackup
+set noswapfile
+" Statusbar
+set laststatus=2
+"set statusline+=%-3.3n\                      " buffer number
+"set statusline+=%*                           " switch back to normal statusline highlight
+"set statusline+=%f\                          " filename
+"set statusline+=%h%m%r%w                     " status flags
+"set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
+"set statusline+=%=                           " right align remainder
+"set statusline+=0x%-8B                       " character value
+"set statusline+=%-14(%l,%c%V%)               " line, character
+"set statusline+=%<%P                         " file position
+"set statusline+=%{StatuslineGit()}
+
+function! InsertStatuslineColor(mode)
+  if a:mode == 'i'
+    hi statusline guibg=Cyan ctermfg=1 guifg=Black ctermbg=15
+  elseif a:mode == 'r'
+    hi statusline guibg=Purple ctermfg=2 guifg=Black ctermbg=7
+  else
+    hi statusline guibg=DarkRed ctermfg=4 guifg=Black ctermbg=7
+  endif
+endfunction
+
+au InsertEnter * call InsertStatuslineColor(v:insertmode)
+au InsertLeave * hi statusline guibg=DarkGrey ctermfg=15 guifg=White ctermbg=8
+
+
+" default the statusline to green when entering Vim
+hi statusline guibg=DarkGrey ctermfg=15 guifg=White ctermbg=8
+
+" Formats the statusline
+set statusline+=\ [%n]\ -                      " Buffer number
+set statusline+=\ %f                           " file name
+"set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+"set statusline+=%{&ff}] "file format
+set statusline+=%y      "filetype
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+
+set statusline+=\ %=                        " align left
+set statusline+=Line:%l/%L[%p%%]            " line X of Y [percent of file]
+set statusline+=\ Col:%c                    " current column
+set statusline+=\ [%b][0x%B]\               " ASCII and byte code under cursor
+
+" Better command-line completion
+set wildmenu
+
+" Show partial commands in the last line of the screen
+set showcmd
+
+" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
+" mapping of <C-L> below)
+set hlsearch
+
+set incsearch
+set ruler
+set ignorecase
+set autoindent
+set scrolloff=5
+set backspace=2 " Backspace can delete stuff I didn't enter
+set hlsearch
+
+" ------- colours
+highlight ColorColumn ctermbg=darkmagenta
+highlight Function ctermfg=blue
+highlight Conditional ctermfg=lightcyan
+highlight Operator ctermfg=red
+highlight Type ctermfg=lightgreen
+
+"diff
+highlight DiffAdd ctermbg=green
+highlight DiffAdd ctermfg=black
+highlight DiffChange ctermfg=yellow
+highlight DiffChange ctermfg=black
+highlight DiffDelete ctermbg=red
+highlight DiffDelete ctermfg=black
+highlight DiffText ctermfg=black
 
 
 
+highlight Comment ctermfg=DarkGray
+highlight Special ctermfg=DarkRed
+highlight SpecialKey ctermfg=DarkGrey
+highlight NonText ctermfg=DarkRed
 
-
-
-
+" If git diff calss vimdiff, use different colorscheme
+if &diff
+    colorscheme slate
+endif
