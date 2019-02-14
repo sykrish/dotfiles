@@ -1,5 +1,8 @@
 " Basic config
 syntax on
+" Git color setting
+au BufNewFile,BufRead .gitmessage.txt setlocal colorcolumn=50
+let g:solarized_termcolors=256
 set nu rnu
 :set colorcolumn=120
 
@@ -8,17 +11,22 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'universal-ctags/ctags'
+Plug 'tpope/vim-dispatch'
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'janko-m/vim-test'
+Plug 'dracula/vim'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'gregsexton/gitv'
 Plug 'justinmk/vim-sneak'
+Plug 'tmhedberg/matchit'
 Plug 'craigemery/vim-autotag'
 Plug 'int3/vim-extradite'
 "Plug 'Mizuchi/vim-ranger'
@@ -27,11 +35,16 @@ Plug 'francoiscabrol/ranger.vim'
 call plug#end()
 
 set mouse=a
+" Netrw settings
+let g:netrw_banner = 0
+let g:netrw_liststyle = 0
+
 
 " Quickscope colour settings
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 nnoremap <leader>h :QuickScopeToggle <CR>
+nnoremap <leader>f :MixFormat <CR>
 "Mapping
 " Ctrlp
 "map ; :Files<CR>
@@ -52,6 +65,8 @@ function! Tab_Or_Complete()
 endfunction
 :inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 :set dictionary="/usr/dict/words
+" Resize steps
+
 
 " FZF
 nmap <c-p> :cclose<CR>:FZF<CR>
@@ -60,6 +75,8 @@ nmap <c-o> :cclose<CR>:Tags<CR>
 nmap <m-o> :execute ':Tags '.expand('<cword>')<CR>
 nmap <c-i> :cclose<CR>:BLines<CR>
 map :ls :Buffers
+map :sbl :set bg=light
+map :sbd :set bg=dark
 
 autocmd VimEnter * command! -bang -nargs=* FZF
   \ call fzf#vim#files(<q-args>,
@@ -80,6 +97,12 @@ nmap <F8> :TagbarToggle<CR>
 
 " Remap code completion to Ctrl+Space {{{2
 inoremap <Nul> <C-n>
+
+" Multicursor
+if !has('gui_running')
+  map <leader>a <A-n>
+endif
+nnoremap <leader>h :QuickScopeToggle <CR>
 
 " Split navigation
 nnoremap <C-J> <C-W><C-J>
@@ -122,6 +145,10 @@ let g:tagbar_type_elixir = {
         \ 't:tests'
     \ ]
 \ }
+" Test
+nmap <silent> <leader>t :TestFile<CR>
+let test#strategy = "dispatch"
+let g:test#preserve_screen = 1
 
 " Zoom on search results
 nnoremap n nzz
@@ -214,9 +241,10 @@ set hlsearch
 
 " ------- colours
 highlight ColorColumn ctermbg=darkmagenta
-highlight Function ctermfg=blue
-highlight Conditional ctermfg=lightcyan
-highlight Operator ctermfg=red
+highlight Function ctermfg=darkcyan
+highlight Define ctermfg=blue
+highlight Conditional ctermfg=yellow
+highlight Operator ctermfg=Darkred
 highlight Type ctermfg=lightgreen
 
 "diff
@@ -231,11 +259,11 @@ highlight DiffText ctermfg=black
 
 
 highlight Comment ctermfg=DarkGray
-highlight Special ctermfg=DarkRed
-highlight SpecialKey ctermfg=DarkGrey
+highlight Special ctermfg=Darkred
 highlight NonText ctermfg=DarkRed
+highlight SpecialKey ctermfg=DarkGrey
 
 " If git diff calss vimdiff, use different colorscheme
-if &diff
-    colorscheme slate
-endif
+" if &diff
+"     colorscheme slate
+" endif
