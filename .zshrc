@@ -2,12 +2,11 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 #alias
-alias v="vim"
-alias vv="vim ./"
-alias vvv="vim ./.vimrc"
-alias esa="eval $(ssh-agent)"
-alias ixm="iex -S mix"
-alias gs="git status -s"
+if [ -f ~/dotfiles/my_alias ]; then
+    source ~/dotfiles/my_alias
+else
+    print "404: ~/.zsh/zshalias not found."
+fi
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 #export FZF_DEFAULT_OPTS='--height=20% --preview="cat {}" --preview-window=right:50%:wrap'
