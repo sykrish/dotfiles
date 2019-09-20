@@ -7,4 +7,6 @@ alias zshconfig="vim ~/dotfiles/.zshrc"
 
 alias esa="eval $(ssh-agent)"
 alias ixm="iex -S mix"
-alias gs="git status -s"
+alias gs="git status"
+
+alias ra="ranger"

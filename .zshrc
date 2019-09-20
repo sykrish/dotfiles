@@ -1,6 +1,11 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export BETTY_APP_MEMCACHE_HOST="localhost"
+export BETTY_APP_MEMCACHE_NAMESPACE="betty5"
+export BETTY_MEMCACHE_HOST="localhost"
+export BETTY_MEMCACHE_NAMESPACE="betty5"
+
 #alias
 if [ -f ~/dotfiles/my_alias ]; then
     source ~/dotfiles/my_alias
@@ -8,8 +13,11 @@ else
     print "404: ~/.zsh/zshalias not found."
 fi
 
+#bindkey '^ ' autosuggest-accept
+
 export ERL_AFLAGS="-kernel shell_history enabled"
-#export FZF_DEFAULT_OPTS='--height=20% --preview="cat {}" --preview-window=right:50%:wrap'
+export FZF_DEFAULT_OPTS='--height=100% --preview="head -100 {}" --preview-window=down:40% '
+#FZF_CTRL_R_OPTS= 'fzf --preview "head -$LINES {}" --color light --margin 5,20'
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/stefanvandelft/.oh-my-zsh"
@@ -80,11 +88,17 @@ ZSH_THEME="mh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  k
+  zsh-syntax-highlighting
+  zsh-autosuggestions
   colored-man-pages
   git
+  shrink-path
   fzf
 )
 
+setopt prompt_subst
+PS1='%n@%m $(shrink_path -f)>'
 # Make sure vim is editor of choice.
 export EDITOR='vim'
 export PAGER='less'
@@ -125,3 +139,6 @@ source $ZSH/oh-my-zsh.sh
 . $HOME/.asdf/completions/asdf.bash
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/opt/mysql@5.5/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"

@@ -14,8 +14,10 @@
 	b = branch
 	ci = commit
 	st = status
+  br = branch
 	tree  =  "!git log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s' --abbrev-commit --all"
-  lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lg = log --reverse
+  lgg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   lh = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --reverse
   logme = log --oneline --reverse --author="stefan"
 	d = difftool
@@ -24,11 +26,11 @@
 [commit]
 	template = /Users/stefanvandelft/.gitmessage.txt
 [pager]
-  log = false
+  log = true
 	branch = false
 	alias = false
   show = false
-	diff = false
+	diff = true
   stash = false
   changes = false
 [diff]
