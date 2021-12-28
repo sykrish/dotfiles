@@ -1,0 +1,9 @@
+# Summarize changes in around 50 characters or less
+
+# major bump: BREAKING, BREAKING CHANGE
+# minor bump: feat
+# patch bump: fix,refactor,perf,docs,style,test
+# ignored: ci, build, chore, merge, MERGE
+
+#'(Merge branch.+|(BREAKING CHANGE|BREAKING|feat|fix|refactor|perf|docs|style|test|ci|build|chore)(\(.+\))?: .+)'
+# or Merge, Refactor, Quality, Fix, Chore, Feature, Test
