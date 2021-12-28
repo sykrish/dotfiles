@@ -1,7 +1,7 @@
 #alias
 alias v="vim"
 alias vv="vim ./"
-alias vvv="vim ./dotfiles/.vimrc"
+alias vvv="vim ~/dotfiles/.vimrc"
 
 alias zshconfig="vim ~/dotfiles/.zshrc"
 
@@ -10,3 +10,5 @@ alias ixm="iex -S mix"
 alias gs="git status"
 
 alias ra="ranger"
+
+alias gtoday='git --no-pager log --pretty=format:"%h%x09%an%x09%ad%x09%s" --since="8am"'
