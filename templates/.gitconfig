@@ -1,9 +1,8 @@
 [user]
-	name = Stefan van Delft
-	email = stefan.van.delft@bettyblocks.com
+	name = #GITNAME
+	email = #GITEMAIL
 [core]
 	editor = vim
-	excludesfile = $HOME/.gitignore_global
 [color]
 	#ui = true
 [alias]
@@ -24,7 +23,7 @@
 	changes = show --stat --oneline
   sstash = stash show
 [commit]
-	template = $HOME/.gitmessage.txt
+	template = #GITMESSAGE
 [pager]
   log = true
 	branch = false

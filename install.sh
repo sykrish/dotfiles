@@ -34,9 +34,10 @@ install_linux() {
   sed -i 's/plugin=(git)/plugin=(zsh-syntax-highlighting zsh-autosuggestions colored-man-pages git shrink-path fzf)/' $ZSHRC
 
   print "Creating links for dotfiles"
-  ln -sv .gitconfig $HOME
-  ln -sv .alias $HOME
-  ln -sv .env_vars $HOME
+  ln -sv $PWD/.gitconfig $HOME
+  ln -sv $PWD/templates/.gitmessage.txt $HOME
+  ln -sv $PWD/.alias $HOME
+  ln -sv $PWD/.env_vars $HOME
 
   # Append settings to .zsh file
   echo "# Appended by install script." >> $ZSHRC
