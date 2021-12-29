@@ -127,7 +127,7 @@ hi vertsplit ctermfg=235 ctermbg=235
 "
 " Allow for switching a buffer without saving it. TODO is still comment
 " relevant? 
-" set hidden
+set hidden
 "
 " Git color setting
 au BufNewFile,BufRead .gitmessage.txt setlocal colorcolumn=50
