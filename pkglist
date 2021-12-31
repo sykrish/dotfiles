@@ -3,3 +3,8 @@ vim
 ranger
 silversearcher-ag
 autojump
+fzf
+libssl-dev
+automake
+autoconf
+libncurses5-dev
