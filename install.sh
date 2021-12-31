@@ -79,10 +79,9 @@ install_linux() {
 
   cp ./templates/.gitconfig $HOME
 
-  sed -i "s/#GITEMAIL/$gitemail/" .gitconfig
-  sed -i "s/#GITNAME/$gitname/" .gitconfig
-  sed -i "s@#GITMESSAGE@$HOME/.gitmessage.txt@" .gitconfig
-
+  sed -i "s/#GITEMAIL/$gitemail/" $HOME/.gitconfig
+  sed -i "s/#GITNAME/$gitname/" $HOME/.gitconfig
+  sed -i "s@#GITMESSAGE@$HOME/.gitmessage.txt@" $HOME/.gitconfig
 
   print "Creating links for dotfiles"
   ln -sv $PWD/templates/.gitmessage.txt $HOME
@@ -96,7 +95,7 @@ install_linux() {
   echo "if [ -f $HOME/.env_vars ]; then source $HOME/.env_vars; fi" >> $ZSHRC
 
   print "Add  aliases to .zshrc file."
-  echo "if [ -f $HOME/.alias ]; then source $HOME.alias; fi" >> $ZSHRC
+  echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >> $ZSHRC
 
   if [[ $nvim_consent == "Y" || $nvim_consent == "y" ]]; then
 	  print "Configuring nvim."
