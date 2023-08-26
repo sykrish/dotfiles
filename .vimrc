@@ -2,13 +2,12 @@
 """"""""""" Editor looks """"""""""""""
 """""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""
-colorscheme dante
 syntax on
 set nu rnu
 set ruler
 set hlsearch
 set colorcolumn=80
-highlight ColorColumn ctermbg=235
+" highlight ColorColumn ctermbg=235
 
 """""""""""""""""""""""""""""""""""""""
 """"""" KeyBindings / mapping """""""""
@@ -21,7 +20,28 @@ map :do :diffoff
 map <leader>s :nohlsearch<CR>
 map <F5> :Ranger <CR>
 map <leader><F5> :e! .<CR>
+map <leader>e :Explore<CR>
 map <leader>n :NERDTreeToggle<CR>
+"
+"
+" C-c and C-v - Copy/Paste to global clipboard
+vmap <C-c> "+y
+imap <C-v> <esc>"+p
+
+" Startify
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
+" let g:startify_session_persistence = 1
+let g:startify_lists = [
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'dir',       'header': ['   Recently used']  },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+ " let g:startify_custom_header =
+ "       \ startify#center(split(system('cat ~/.config/nvim/love-death-robots.txt'), '\n'))
+
+
 "
 " Sneak (search 2 letters)
 map S <Plug>Sneak_s
@@ -35,9 +55,9 @@ inoremap <Nul> <C-n>
 "
 " Buffers
 nmap <leader><Tab> :Buffers<CR>
-nmap <silent> <leader>ls :Buffers<CR>
-map :ls :Buffers
-nmap <leader><Tab> :Buffers<CR>
+" nmap <silent> <leader>ls :Buffers<CR>
+" map :ls :Buffers
+" nmap <leader><Tab> :Buffers<CR>
 "
 " Navigate through buffers.
 nnoremap <leader>h :bprev<CR>
@@ -79,7 +99,14 @@ vnoremap > >gv
 nmap <silent> <leader>t :TestFile<CR>
 nmap <silent> <leader>f :MixFormat<CR>
 " Test settings
+" let test#strategy = "neovim"
 let test#strategy = "dispatch"
+let g:test#neovim#start_normal = 1 " If using neovim strategy
+" let test#neovim#term_position = "vert botright 30"
+let test#neovim#term_position = "botright 15"
+" let test#neovim#term_position = "topleft"
+let g:test#basic#start_normal = 1 " If using basic strategy
+" let test#strategy = "dispatch"
 let g:test#preserve_screen = 1
 
 " Zoom on search results
@@ -137,6 +164,8 @@ au BufNewFile,BufRead .gitmessage.txt setlocal colorcolumn=50
 """""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+Plug 'nvim-lua/plenary.nvim'
+Plug 'hoschi/yode-nvim'
 Plug 'Lokaltog/vim-monotone'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'Yggdroot/indentLine'
@@ -149,6 +178,7 @@ Plug 'camgunz/amber'
 Plug 'cseelus/vim-colors-lucid'
 Plug 'danilo-augusto/vim-afterglow'
 Plug 'dracula/vim'
+Plug 'Ardakilic/vim-tomorrow-night-theme'
 Plug 'elixir-editors/vim-elixir'
 Plug 'elzr/vim-json'
 Plug 'francoiscabrol/ranger.vim'
@@ -178,8 +208,11 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
+Plug 'preservim/tagbar'
+Plug 'mmorearty/elixir-ctags'
 Plug 'universal-ctags/ctags'
 Plug 'whatyouhide/vim-gotham'
+Plug 'mhinz/vim-startify'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 call plug#end()
@@ -192,6 +225,22 @@ call plug#end()
 " Quickscope colour settings
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+
+"TODO put somewhere else
+" YODE
+lua require('yode-nvim').setup({})
+map <Leader>yc      :YodeCreateSeditorFloating<CR>
+map <Leader>yr :YodeCreateSeditorReplace<CR>
+nmap <Leader>bd :YodeBufferDelete<cr>
+imap <Leader>bd <esc>:YodeBufferDelete<cr>
+" these commands fall back to overwritten keys when cursor is in split window
+map <C-W>r :YodeLayoutShiftWinDown<CR>
+map <C-W>R :YodeLayoutShiftWinUp<CR>
+map <C-W>J :YodeLayoutShiftWinBottom<CR>
+map <C-W>K :YodeLayoutShiftWinTop<CR>
+" at the moment this is needed to have no gap for floating windows
+set showtabline=2
+
 "
 " FZF
 nmap <c-p> :cclose<CR>:FZF<CR>
@@ -219,8 +268,8 @@ autocmd VimEnter * command! -bang -nargs=* Ag
 
 " set mouse=a
 " Netrw settings
-" let g:netrw_banner = 0
-" let g:netrw_liststyle = 0
+let g:netrw_banner = 0
+let g:netrw_liststyle = 0
 
 " Multicursor
 if !has('gui_running')
@@ -348,4 +397,16 @@ augroup twig_ft
   autocmd BufNewFile,BufRead *.output   set syntax=elixir
   autocmd BufNewFile,BufRead *.artifact   set syntax=json
 augroup END
+
+" let g:dracula_colorterm = 0
+" colorscheme dracula
+
+
+" set guifont=Hack\ Nerd\ Font\ Mono:h11.5
+set guifont=Fira\ Mono:h12.5
+" let g:neovide_transparency=0.85
+" let g:neovide_fullscreen=v:true
+let g:neovide_cursor_vfx_mode="pixiedust"
+let g:neovide_cursor_vfx_particle_density=100
+
 

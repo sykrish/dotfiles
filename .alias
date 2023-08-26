@@ -1,7 +1,7 @@
 #alias
-alias v="vim"
-alias vv="vim ./"
-alias vvv="vim ~/dotfiles/.vimrc"
+alias v="nvim -u ~/.nvimrc"
+alias vv="nvim -u ~/.nvimrc ./"
+alias vvv="nvim -u ~/.nvimrc ~/.nvimrc"
 
 alias zshconfig="vim ~/dotfiles/.zshrc"
 
@@ -11,4 +11,5 @@ alias gs="git status"
 
 alias ra="ranger"
 
+alias fonts='fc-list : family style|sort'
 alias gtoday='git --no-pager log --pretty=format:"%h%x09%an%x09%ad%x09%s" --since="8am"'
