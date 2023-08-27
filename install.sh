@@ -3,7 +3,7 @@
 ZSHRC="$HOME/.zshrc"
 
 print() {
-  echo -e "\n - $1\n"
+  echo "\n - $1\n"
 }
 
 print "Set package-manager in env-var"
