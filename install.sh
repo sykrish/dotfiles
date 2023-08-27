@@ -19,10 +19,6 @@ configure_nvim() {
 print "Configure nvim? [y/n]"
 read nvim_consent
 
-print "Installing following packages:"
-echo "$(cat -n pkglist) "
-sudo $PACKAGE_MANAGER $INSTALL_FLAGS $(cat pkglist)
-
 print "Installing zsh"
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 

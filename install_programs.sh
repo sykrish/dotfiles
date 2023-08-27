@@ -25,6 +25,7 @@ mkdir $HOME/repos
 #     sudo $PACKAGE_MANAGER $INSTALL_FLAGS "$program"
 # done < pkglist
 
+echo "$(cat -n pkglist) "
 sudo $PACKAGE_MANAGER $INSTALL_FLAGS $(cat pkglist)
 
 # Add user to video group for screen brightness control
