@@ -12,18 +12,6 @@ print "Validating package-manager in env-var: $PACKAGE_MANAGER"
 echo $PACKAGE_MANAGER
 echo $INSTALL_FLAGS
 
-# get_installer() {
-# if [ $SYSTEM == "Linux" ];
-# then 
-#   INSTALLER="sudo apt get";
-# else 
-#   # not_supported;
-#   INSTALLER="brew install";
-# fi;
-
-# }
-
-
 configure_nvim() {
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -62,14 +50,14 @@ echo "if [ -f $HOME/.env_vars ]; then source $HOME/.env_vars; fi" >> $ZSHRC
 print "Add aliases to .zshrc file."
 echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >> $ZSHRC
 
-./install-programs.sh
+./install_programs.sh;
 
 print "Moving .config folder, this will overwrite existing"
 cp -r .config/* $HOME/.config
 
 if [[ $nvim_consent == "Y" || $nvim_consent == "y" ]]; then
   print "Configuring nvim."
-  configure_nvim
+  configure_nvim;
   echo "OK."
 else
   echo "Skipping configuring nvim."
@@ -86,19 +74,7 @@ sed -i "s@#GITMESSAGE@$HOME/.gitmessage.txt@" $HOME/.gitconfig
 # Copy .gitconfig template so we can configure it.
 cp ./templates/.gitconfig $HOME
 
-# not_supported() {
-# echo "Only Linux is supported at this moment."
-# exit 1
-# }
+print "Creating new group VIDEO & Add user to it for screen brightness control"
+sudo usermod -a -G video $USER
 
-# SYSTEM="$(uname)"
-# get_installer
-# echo $INSTALLER
-
-# if [ $SYSTEM == "Linux" ];
-# then 
-#   install_linux;
-# else 
-#   not_supported;
-# fi;
-
+print "Done"

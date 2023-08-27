@@ -3,19 +3,18 @@
 # Create a directory to store repositories
 mkdir $HOME/repos
 
-# Install packages using the chosen package manager
-sudo $PACKAGE_MANAGER $INSTALL_FLAGS 
-
-# Install additional programs from the additional_programs.txt file
+# Install additional programs from txt file
 while read -r program; do
     sudo $PACKAGE_MANAGER $INSTALL_FLAGS "$program"
-done < tool-programs.txt
+done < pkglist
 
 # Add user to video group for screen brightness control
-sudo usermod -a -G video $USER
 
 # Clone slock repository
 git clone https://git.suckless.org/slock $HOME/repos/slock
+cd $HOME/repos/slock; 
+make clean install;
+cd -;
 # Clone and install ly display manager
 # git clone --recurse-submodules https://github.com/fairyglade/ly repos/ly
 # cd repos/ly
