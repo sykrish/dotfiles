@@ -18,17 +18,6 @@ configure_nvim() {
 
 print "Configure nvim? [y/n]"
 read nvim_consent
-
-print "Installing zsh"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-echo "...and its plugins!"
-git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-
-echo "... enabling plugins."
-sed -i 's/plugins=(git)/plugins=(zsh-syntax-highlighting zsh-autosuggestions mix colored-man-pages git shrink-path fzf asdf)/' $ZSHRC
-
 print "Creating links for dotfiles"
 ln -sv $PWD/templates/.gitmessage.txt $HOME
 ln -sv $PWD/.alias $HOME
@@ -44,6 +33,20 @@ print "Add aliases to .zshrc file."
 echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >> $ZSHRC
 
 ./install_programs.sh;
+
+print "Installing zsh"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+echo "...and its plugins!"
+git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+echo "... enabling plugins."
+sed -i 's/plugins=(git)/plugins=(zsh-syntax-highlighting zsh-autosuggestions mix colored-man-pages git shrink-path fzf asdf)/' $ZSHRC
+
+# Set ZSH as new default shell.
+chsh -s /usr/bin/zsh
+echo "Default shell: $SHELL"
 
 print "Moving .config folder, this will overwrite existing"
 cp -r .config/* $HOME/.config
