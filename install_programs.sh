@@ -4,9 +4,11 @@
 mkdir $HOME/repos
 
 # Install additional programs from txt file
-while read -r program; do
-    sudo $PACKAGE_MANAGER $INSTALL_FLAGS "$program"
-done < pkglist
+# while read -r program; do
+#     sudo $PACKAGE_MANAGER $INSTALL_FLAGS "$program"
+# done < pkglist
+
+sudo $PACKAGE_MANAGER $INSTALL_FLAGS $(cat pkglist)
 
 # Add user to video group for screen brightness control
 
