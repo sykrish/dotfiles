@@ -24,11 +24,6 @@ configure_nvim() {
 	nvim --cmd PluginInstall --cmd qall
 }
 
-install_docker() {
-	curl -fsSL https://get.docker.com -o get-docker.sh
- 	sudo sh get-docker.sh
-}
-
 install_linux() {
   print "Please enter gitconfigs:"
 
@@ -39,31 +34,9 @@ install_linux() {
   print "Configure nvim? [y/n]"
   read nvim_consent
 
-  print "Install docker?[y/n] info: https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script?"
-  read docker_consent
-
-  print "Install slack? [y/n]"
-  read slack_consent
-
   print "Installing following packages:"
   echo "$(cat -n pkglist) "
   sudo apt-get install $(cat pkglist)
-
-  if [[ $docker_consent == "Y" || $docker_consent == "y" ]]; then
-	  print "Installing Docker."
-	  install_docker
-	  echo "OK."
-  else
-	  print "Skipping Docker."
-  fi
-
-  if [[ $slack_consent == "Y" || $slack_consent == "y" ]]; then
-	  print "Installing Slack."
-	  sudo apt-get install slack-desktop
-	  echo "OK."
-  else
-	  print "Skipping Slack."
-  fi
 
   print "Installing zsh"
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
