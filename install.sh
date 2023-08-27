@@ -18,19 +18,11 @@ configure_nvim() {
 
 print "Configure nvim? [y/n]"
 read nvim_consent
+
 print "Creating links for dotfiles"
 ln -sv $PWD/templates/.gitmessage.txt $HOME
 ln -sv $PWD/.alias $HOME
 ln -sv $PWD/.env_vars $HOME
-
-# Append settings to .zsh file
-echo "# Appended by install script." >> $ZSHRC
-
-print "Env vars are managed by .zshrc file."
-echo "if [ -f $HOME/.env_vars ]; then source $HOME/.env_vars; fi" >> $ZSHRC
-
-print "Add aliases to .zshrc file."
-echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >> $ZSHRC
 
 ./install_programs.sh;
 
@@ -47,6 +39,16 @@ sed -i 's/plugins=(git)/plugins=(zsh-syntax-highlighting zsh-autosuggestions mix
 # Set ZSH as new default shell.
 chsh -s /usr/bin/zsh
 echo "Default shell: $SHELL"
+
+# Append settings to .zsh file
+echo "# Appended by install script." >> $ZSHRC
+
+print "Env vars are managed by .zshrc file."
+echo "if [ -f $HOME/.env_vars ]; then source $HOME/.env_vars; fi" >> $ZSHRC
+
+print "Add aliases to .zshrc file."
+echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >> $ZSHRC
+
 
 print "Moving .config folder, this will overwrite existing"
 cp -r .config/* $HOME/.config
