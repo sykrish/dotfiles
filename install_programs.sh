@@ -13,6 +13,10 @@ else
     exit 1
 fi
 
+print "Validating package-manager in env-var: $PACKAGE_MANAGER"
+echo $PACKAGE_MANAGER
+echo $INSTALL_FLAGS
+
 # Create a directory to store repositories
 mkdir $HOME/repos
 

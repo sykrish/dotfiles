@@ -8,9 +8,6 @@ print() {
 
 print "Set package-manager in env-var"
 source ./init.sh
-print "Validating package-manager in env-var: $PACKAGE_MANAGER"
-echo $PACKAGE_MANAGER
-echo $INSTALL_FLAGS
 
 configure_nvim() {
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
