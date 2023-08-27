@@ -3,7 +3,7 @@
 ZSHRC="$HOME/.zshrc"
 
 print() {
-  echo "\n - $1\n"
+  echo -e "\n - $1\n"
 }
 
 print "Set package-manager in env-var"
@@ -61,6 +61,8 @@ print "Please enter gitconfigs:"
 read -p "Enter email that will be used mainly for git: " gitemail
 read -p "Enter name: " gitname
 
+#Ensure .gitconfig exists
+touch $HOME/.gitconfig
 sed -i "s/#GITEMAIL/$gitemail/" $HOME/.gitconfig
 sed -i "s/#GITNAME/$gitname/" $HOME/.gitconfig
 sed -i "s@#GITMESSAGE@$HOME/.gitmessage.txt@" $HOME/.gitconfig
