@@ -1,8 +1,8 @@
-autoconf
 autojump
 automake
 brightnessctl
 build-essential
+curl
 dunst
 fonts-font-awesome 
 fzf
