@@ -23,6 +23,7 @@ libxcb-xkb-dev
 libxkbcommon
 libxrandr-dev
 make
+nvim
 ncmpcpp
 pkg-config
 python

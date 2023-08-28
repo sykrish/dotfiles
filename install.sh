@@ -16,9 +16,6 @@ configure_nvim() {
 	nvim --cmd PluginInstall --cmd qall
 }
 
-print "Configure nvim? [y/n]"
-read nvim_consent
-
 print "Creating links for dotfiles"
 ln -sv $PWD/templates/.gitmessage.txt $HOME
 ln -sv $PWD/.alias $HOME
@@ -53,6 +50,8 @@ echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >> $ZSHRC
 print "Moving .config folder, this will overwrite existing"
 cp -r .config/* $HOME/.config
 
+print "Configure nvim? [y/n]"
+read nvim_consent
 if [[ $nvim_consent == "Y" || $nvim_consent == "y" ]]; then
   print "Configuring nvim."
   configure_nvim;
