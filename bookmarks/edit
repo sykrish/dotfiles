@@ -1,0 +1,5 @@
+meta; ~/betty/meta_api/lib/
+compilerjs; ~/betty/compiler.js/reactor/src/
+ide-common; ~/betty/pretty-betty/packages/common/src
+ide-pretty-betty; ~/betty/pretty-betty/packages/pretty-betty/src
+projects; ~/projects/
