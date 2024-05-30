@@ -22,6 +22,7 @@ set $term alacritty
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $toggle ~/scripts/sway/to-external.sh
 set $menu2 wofi --show run | xargs swaymsg exec --
+set $bookmarks ~/dotfiles/bookmarks/bookmarks.sh
 set $lock slock
 
 include /etc/sway/config-vars.d/*
@@ -30,7 +31,7 @@ include /etc/sway/config-vars.d/*
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/Pictures/Wallpapers/bosch-last-judgement.jpg fill
+output * bg ~/Pictures/Wallpapers/tuin2.jpeg fill
 #
 # Example configuration:
 #
@@ -39,7 +40,7 @@ output * bg ~/Pictures/Wallpapers/bosch-last-judgement.jpg fill
 
 #start dunst
 exec dunst
-exec redshift -c ~/.config/redshift.conf
+exec redshift -P -c ~/.config/redshift.conf
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -50,7 +51,7 @@ exec redshift -c ~/.config/redshift.conf
 exec swayidle -w \
          timeout 340 'notify-send "Locking in 60 seconds"' \
          timeout 380 'notify-send "Locking in 20 seconds"' \
-         timeout 400 'slock' \
+         timeout 400 'if [ $(pgrep slock) ]; then echo "slock is running"; else slock; fi' \
          timeout 520 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' 
 
          #before-sleep 'slock'
@@ -89,6 +90,12 @@ exec swayidle -w \
     # Toggle monitor
     bindsym $mod+n exec $toggle
 
+    # Toggle Redshift
+    bindsym $mod+m exec $(pkill -USR1 '^redshift$') && notify-send "Send signal to redshift";
+
+    # Close last dunst notification
+    bindsym $mod+Shift+d exec $(dunstctl close)
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -103,7 +110,7 @@ exec swayidle -w \
     bindsym $mod+q exec $lock
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    # bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
     bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -200,6 +207,9 @@ exec swayidle -w \
     # Swap focus between the tiling area and the floating area
     # bindsym $mod+space focus mode_toggle
     bindsym $mod+space exec $menu2
+    bindsym $mod+Shift+b exec $bookmarks
+    bindsym $mod+Shift+w exec $bookmarks websites
+    bindsym $mod+Shift+e exec $bookmarks edit
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
