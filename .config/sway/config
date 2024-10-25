@@ -93,6 +93,9 @@ exec swayidle -w \
     # Toggle Redshift
     bindsym $mod+m exec $(pkill -USR1 '^redshift$') && notify-send "Send signal to redshift";
 
+    # Make screenshot of area
+    bindsym $mod+Shift+s exec $(grimshot copy area)
+
     # Close last dunst notification
     bindsym $mod+Shift+d exec $(dunstctl close)
 
