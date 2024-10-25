@@ -11,6 +11,7 @@ fonts-font-awesome
 freetype2
 fzf
 grim
+grimshot
 i3blocks
 libgstreamer-plugins-base1.0-dev 
 libgstreamer1.0-dev
@@ -31,6 +32,7 @@ qutebrowser
 ranger
 redshift
 silversearcher-ag
+slurp
 sway
 swayidle
 vim

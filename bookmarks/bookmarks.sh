@@ -2,6 +2,8 @@
 
 bookmarks=~/dotfiles/bookmarks/bookmarks.sh
 websites=~/dotfiles/bookmarks/websites
+monitors=~/dotfiles/bookmarks/monitors.sh
+monitors=~/dotfiles/bookmarks/tools.sh
 edit=~/dotfiles/bookmarks/edit
 
 #TODO command bookmars? docs from org / obsidian? / greenclip
@@ -21,8 +23,17 @@ case "$1" in
             | xargs -r -0 -I % sh -c 'emacsclient -e "(+workspace/new)" | emacsclient -n %' && swaymsg workspace 1
 
         ;;
+    monitors)
+         $monitors \
+            | rofi -dmenu \
+            | (xargs ~/dotfiles/bookmarks/monitors.sh)
+
+        ;;
+    tools)
+
+        ;;
     *)
-        printf "websites" | rofi -dmenu | xargs $bookmarks
+        printf "websites\nedit\nmonitors" | rofi -dmenu | xargs $bookmarks
 
         ;;
 
