@@ -3,6 +3,8 @@ alias v="nvim -u ~/.nvimrc"
 alias vv="nvim -u ~/.nvimrc ./"
 alias vvv="nvim -u ~/.nvimrc ~/.nvimrc"
 
+alias l="eza --git -al --group-directories-first"
+
 alias zshconfig="vim ~/dotfiles/.zshrc"
 
 alias esa="eval $(ssh-agent)"
