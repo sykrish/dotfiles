@@ -729,13 +729,13 @@ schemes:
 
   Spacemac: &SpacemacsLight
     primary:
-      background: '#fbf8ef'
+      background: '#fdf8ec'
       foreground: '#655370'
 
     normal:
       text: '#061822'
       black:   '#000000'
-      red:     '#f2241f'
+      red:     '#c1241f'
       green:   '#67b11d'
       yellow:  '#b1951d'
       blue:    '#3a81c3'
