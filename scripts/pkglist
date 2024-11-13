@@ -25,10 +25,8 @@ libxkbcommon
 libxrandr-dev
 make
 nvim
-ncmpcpp
 pkg-config
 python
-qutebrowser
 ranger
 redshift
 silversearcher-ag

@@ -1,7 +1,11 @@
-"""""""""""""""""""""""""""""""""""""""
+let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
+if !filereadable(autoload_plug_path)
+  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
+      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 """"""""""" Editor looks """"""""""""""
-"""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""
 syntax on
 set nu rnu
 set ruler
@@ -9,10 +13,21 @@ set hlsearch
 set colorcolumn=80
 " highlight ColorColumn ctermbg=235
 
-"""""""""""""""""""""""""""""""""""""""
+" Startify
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
+" let g:startify_session_persistence = 1
+let g:startify_lists = [
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'dir',       'header': ['   Recently used']  },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+ " let g:startify_custom_header =
+ "       \ startify#center(split(system('cat ~/.config/nvim/love-death-robots.txt'), '\n'))
+
 """"""" KeyBindings / mapping """""""""
-"""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""
+
 " Use the space-bar as the leader rather than the backslash.
 let mapleader = ' '
 map :dt :diffthis
@@ -28,19 +43,6 @@ map <leader>n :NERDTreeToggle<CR>
 vmap <C-c> "+y
 imap <C-v> <esc>"+p
 
-" Startify
-let g:startify_change_to_dir = 0
-let g:startify_change_to_vcs_root = 1
-" let g:startify_session_persistence = 1
-let g:startify_lists = [
-      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'dir',       'header': ['   Recently used']  },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
-      \ ]
- " let g:startify_custom_header =
- "       \ startify#center(split(system('cat ~/.config/nvim/love-death-robots.txt'), '\n'))
-
 
 "
 " Sneak (search 2 letters)
@@ -55,49 +57,39 @@ inoremap <Nul> <C-n>
 "
 " Buffers
 nmap <leader><Tab> :Buffers<CR>
-" nmap <silent> <leader>ls :Buffers<CR>
-" map :ls :Buffers
-" nmap <leader><Tab> :Buffers<CR>
-"
 " Navigate through buffers.
 nnoremap <leader>h :bprev<CR>
 nnoremap Z :bprev<CR>
 nnoremap <leader>l :bnext<CR>
 nnoremap X :bnext<CR>
-"
 " Interact with buffers.
 nnoremap <Leader>w :bwipe<CR>
-"
 " Move to the previous buffer
 nmap <leader>lh :bprevious<CR>
-"
+
+
 " Silver searcher
 map <c-a> :Ag! 
-" map :sbl :set bg=light
-" map :sbd :set bg=dark
-"
+
 " Split navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-"
-" Ctagsder
-"nnoremap <C-I> :BLines<CR>
-nnoremap <Leader-K> :Tags<CR>
-nnoremap <Leader-P> :Files<CR>
+
 " nnoremap <C-P> :execute ':FZF -q '.shellescape(expand('<cword>'))<CR>
 nnoremap <leader>h :QuickScopeToggle <CR>
 nnoremap <leader>m :MixFormat <CR>
 nnoremap <leader>se :set syntax=elixir <CR>
-"
+
 " Indent more than once on visual blocks.
 vnoremap < <gv
 vnoremap > >gv
 "
 " Elixir Configs
 nmap <silent> <leader>t :TestFile<CR>
-nmap <silent> <leader>f :MixFormat<CR>
+nmap <silent> <leader>mf :MixFormat<CR>
+
 " Test settings
 " let test#strategy = "neovim"
 let test#strategy = "dispatch"
@@ -113,25 +105,19 @@ let g:test#preserve_screen = 1
 nnoremap n nzz
 nnoremap N Nzz
 
-"""""""""""""""""""""""""""""""""""""""
 """"""""""""" Settings """"""""""""""""
-"""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""
-"
+
 " Undo settings
 set undofile
 set undodir=~/.vim/undo,/tmp
 set undolevels=1024
 set undoreload=1024
-"
 " Better command-line completion
 set wildmenu
 set wildmode=list:longest,full
 set wildignore=*.o,*~,*.pyc,*.tmp
-"
 " Show partial commands in the last line of the screen
 set showcmd
-"
 " Highlight searches (use <C-L> to temporarily turn off highlighting; see the
 " mapping of <C-L> below)
 set incsearch
@@ -140,10 +126,7 @@ set scrolloff=5
 set backspace=2 " Backspace can delete stuff I didn't enter
 set ignorecase
 " Disable backing up
-"set nobackup
-"set nowritebackup
 set noswapfile
-"
 "Show tabs as 2 spaces
 set tabstop=2
 set shiftwidth=2
@@ -164,6 +147,22 @@ au BufNewFile,BufRead .gitmessage.txt setlocal colorcolumn=50
 """""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+" LSP
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
+  Plug 'VonHeikemen/lsp-zero.nvim'
+  Plug 'nvimdev/lspsaga.nvim'
+
+  Plug 'jmsegrev/lsp_lines.nvim'
+  " Treesitter (Syntax highlighting and folding)
+  Plug 'nvim-treesitter/nvim-treesitter'
+
+  " Snippets
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
+
+
 Plug 'nvim-lua/plenary.nvim'
 Plug 'hoschi/yode-nvim'
 Plug 'Lokaltog/vim-monotone'
@@ -215,7 +214,33 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'mhinz/vim-startify'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
+Plug 'connorholyday/vim-snazzy'
+Plug 'connorholyday/vim-snazzy'
 call plug#end()
+
+  " require "user.blankline"
+  " require "user.colorschemes"
+  " require "user.context_vt"
+  " require "user.cursorline"
+  " require "user.cursorline"
+  " require "user.focus"
+  " require "user.formatter"
+  " require "user.gitsigns"
+  " require "user.hop"
+  " require "user.lualine"
+  " require "user.treesitter"
+  " require "user.twilight"
+  " require "user.cmp"
+lua <<EOF
+
+  require "user.lsp"
+  require "user.lsp-saga"
+  require "user.nvim-tree"
+
+  require("lsp_lines").setup()
+
+EOF
+
 
 """""""""""""""""""""""""""""""""""""""
 """"""""" Plugins Configs """""""""""""

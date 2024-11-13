@@ -3,7 +3,7 @@
 bookmarks=~/dotfiles/bookmarks/bookmarks.sh
 websites=~/dotfiles/bookmarks/websites
 monitors=~/dotfiles/bookmarks/monitors.sh
-monitors=~/dotfiles/bookmarks/tools.sh
+tools=~/dotfiles/bookmarks/tools.sh
 edit=~/dotfiles/bookmarks/edit
 
 #TODO command bookmars? docs from org / obsidian? / greenclip

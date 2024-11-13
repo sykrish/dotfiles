@@ -35,6 +35,7 @@ git clone https://git.suckless.org/slock $HOME/repos/slock
 cd $HOME/repos/slock; 
 make clean install;
 cd -;
+
 # Clone and install ly display manager
 # git clone --recurse-submodules https://github.com/fairyglade/ly repos/ly
 # cd repos/ly
