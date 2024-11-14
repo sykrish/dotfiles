@@ -177,3 +177,5 @@ install_all() {
   install_package_list
   install_emacs
 }
+
+install_all
