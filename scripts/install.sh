@@ -50,15 +50,16 @@ zsh() {
 
   print "Installing oh my zash"
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  debug_stop
-  # Set ZSH as new default shell.
-  print "Setting ZSH as default shell..."
-  chsh -s /usr/bin/zsh
+  # debug_stop
+  # # Set ZSH as new default shell.
+  # print "Setting ZSH as default shell..."
+  # chsh -s /usr/bin/zsh
   echo "Default shell: $SHELL"
   debug_stop
 
   print "Zsh installed, enable zsh and continue the script"
-  exit 0
+  # exit 0
+  configure_zsh
 }
 
 configure_zsh() {
@@ -200,7 +201,7 @@ install_all() {
   sudo apt-get update
   install_essentials
   if [ -n "$ZSH_VERSION" ]; then
-    configure_zsh
+    print "ZSH alreadt installed"
   elif [ -n "$BASH_VERSION" ]; then
     zsh
   fi
