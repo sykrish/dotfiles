@@ -186,7 +186,7 @@ configure() {
 }
 
 install_all() {
-  apt-get update
+  sudo apt-get update
   install_essentials
   zsh
   install_asdf
