@@ -43,7 +43,15 @@ configure_nvim() {
 
 zsh() {
   print "Installing zsh"
+  sudo apt install zsh -y
+
+  print "Installing oh my zash"
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  debug_stop
+  # Set ZSH as new default shell.
+  print "Setting ZSH as default shell..."
+  chsh -s /usr/bin/zsh
+  echo "Default shell: $SHELL"
   debug_stop
 
   print "...and its plugins!"
@@ -53,12 +61,6 @@ zsh() {
 
   print "... enabling plugins."
   sed -i 's/plugins=(git)/plugins=(zsh-syntax-highlighting zsh-autosuggestions mix colored-man-pages git shrink-path fzf asdf)/' $ZSHRC
-  debug_stop
-
-  # Set ZSH as new default shell.
-  print "Setting ZSH as default shell..."
-  chsh -s /usr/bin/zsh
-  echo "Default shell: $SHELL"
   debug_stop
 
   print "Append settings to .zsh file"
@@ -146,7 +148,7 @@ librewolf() {
 
 install_essentials() {
   print "Install essentials"
-  sudo apt install curl
+  sudo apt install curl -y
 }
 
 install_package_list() {
