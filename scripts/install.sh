@@ -171,9 +171,9 @@ configure() {
 }
 
 install_all() {
-  install_essentials()
-  zsh()
-  install_asdf()
-  install_package_list()
-  install_emacs()
+  install_essentials
+  zsh
+  install_asdf
+  install_package_list
+  install_emacs
 }
