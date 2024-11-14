@@ -201,7 +201,7 @@ install_all() {
   install_essentials
   if [ -n "$ZSH_VERSION" ]; then
     configure_zsh
-  else
+  elif [ -n "$BASH_VERSION" ]; then
     zsh
   fi
   install_asdf
