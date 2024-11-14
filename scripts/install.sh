@@ -6,6 +6,11 @@ print() {
   echo -e "\n - $1\n"
 }
 
+debug_stop() {
+  print "Press enter to continue"
+  read test
+}
+
 print "Determine package-manager in env-var"
 source ../scripts/init.sh
 
@@ -39,18 +44,22 @@ configure_nvim() {
 zsh() {
   print "Installing zsh"
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  debug_stop
 
   print "...and its plugins!"
   git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  debug_stop
 
   print "... enabling plugins."
   sed -i 's/plugins=(git)/plugins=(zsh-syntax-highlighting zsh-autosuggestions mix colored-man-pages git shrink-path fzf asdf)/' $ZSHRC
+  debug_stop
 
   # Set ZSH as new default shell.
   print "Setting ZSH as default shell..."
   chsh -s /usr/bin/zsh
   echo "Default shell: $SHELL"
+  debug_stop
 
   print "Append settings to .zsh file"
   echo "# Appended by install script." >> $ZSHRC
@@ -60,6 +69,7 @@ zsh() {
 
   print "Add aliases to .zshrc file"
   echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >> $ZSHRC
+  debug_stop
 }
 
 configure_git() {
@@ -86,6 +96,7 @@ install_emacs() {
   asdf plugin add emacs https://github.com/mimikun/asdf-emacs.git
   # Show all installable versions
   asdf list-all emacs
+  debug_stop
 
   # Install specific version
   asdf install emacs latest
@@ -141,6 +152,7 @@ install_essentials() {
 install_package_list() {
   print "install package list"
   ../scripts/install_programs.sh;
+  debug_stop
 }
 
 install_asdf() {
@@ -148,11 +160,13 @@ install_asdf() {
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
   # TODO check if echo goes correctly
   echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
+  debug_stop
 
   echo "# append completions to fpath" >> $ZSHRC
   echo "fpath=(${ASDF_DIR}/completions $fpath)" >> $ZSHRC
   echo "# initialise completions with ZSH's compinit" >> $ZSHRC
   echo "autoload -Uz compinit && compinit" >> $ZSHRC
+  debug_stop
 
   print "Install asdf done"
 
@@ -162,6 +176,7 @@ install_asdf() {
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
   asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
   print "Adding asdf plugins done"
+  debug_stop
 }
 
 configure() {
