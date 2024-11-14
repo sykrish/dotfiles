@@ -14,18 +14,17 @@ configure_nvim() {
   read nvim_consent
   if [[ $nvim_consent == "Y" || $nvim_consent == "y" ]]; then
     print "Configuring nvim."
-    configure_nvim;
+    print "Configure Nvim"
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    ln -sv $PWD/.vimrc $HOME/.nvimrc
+    nvim --cmd PluginInstall --cmd qall
+    print "Configure Nvim done"
     print "OK."
   else
     print "Skipping configuring nvim."
   fi
 
-  print "Configure Nvim"
-  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  ln -sv $PWD/.vimrc $HOME/.nvimrc
-  nvim --cmd PluginInstall --cmd qall
-  print "Configure Nvim done"
 }
 
 # print "Creating links for dotfiles"
