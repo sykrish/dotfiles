@@ -4,7 +4,6 @@ automake
 brightnessctl
 build-essential
 cmake
-curl
 dunst
 fontconfig
 fonts-font-awesome 

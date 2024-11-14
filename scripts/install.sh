@@ -6,10 +6,20 @@ print() {
   echo -e "\n - $1\n"
 }
 
-print "Set package-manager in env-var"
-source ./init.sh
+print "Determine package-manager in env-var"
+source ../scripts/init.sh
 
 configure_nvim() {
+  print "Configure nvim? [y/n]"
+  read nvim_consent
+  if [[ $nvim_consent == "Y" || $nvim_consent == "y" ]]; then
+    print "Configuring nvim."
+    configure_nvim;
+    print "OK."
+  else
+    print "Skipping configuring nvim."
+  fi
+
   print "Configure Nvim"
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -23,20 +33,8 @@ configure_nvim() {
 # ln -sv $PWD/.alias $HOME
 # ln -sv $PWD/.env_vars $HOME
 
-./install_programs.sh;
-
 # print "Moving .config folder, this will overwrite existing"
 # cp -r .config/* $HOME/.config
-
-print "Configure nvim? [y/n]"
-read nvim_consent
-if [[ $nvim_consent == "Y" || $nvim_consent == "y" ]]; then
-  print "Configuring nvim."
-  configure_nvim;
-  print "OK."
-else
-  print "Skipping configuring nvim."
-fi
 
 
 zsh() {
@@ -79,13 +77,10 @@ configure_git() {
   # Copy .gitconfig template so we can configure it.
   cp ./templates/.gitconfig $HOME
 
-  print "Creating new group VIDEO & Add user to it for screen brightness control"
-  sudo usermod -a -G video $USER
-
   print "Configure git: done"
 }
 
-emacs() {
+install_emacs() {
   print "Installing Emacs..."
   # asdf plugin add emacs
   # or
@@ -112,12 +107,12 @@ emacs() {
   # make
   # print "Validate if emacs is installed correctly: ./src/emacs"
 
-  # print "Installing Doom emacs..."
+  print "Installing Doom emacs..."
 
-  # git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
-  # ~/.config/emacs/bin/doom install
+  git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+  ~/.config/emacs/bin/doom install
 
-  # print "Doom emacs done"
+  print "Doom emacs done"
 }
 
 check_continue() {
@@ -137,4 +132,49 @@ librewolf() {
   sudo extrepo enable librewolf
   sudo apt update && sudo apt install librewolf -y
   print "Librewolf done, don't forget to change the settings!"
+}
+
+install_essentials() {
+  print "Install essentials"
+  apt install curl
+}
+
+install_package_list() {
+  print "install package list"
+  ../scripts/install_programs.sh;
+}
+
+install_asdf() {
+  print "Install asdf"
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
+  # TODO check if echo goes correctly
+  echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
+
+  echo "# append completions to fpath" >> $ZSHRC
+  echo "fpath=(${ASDF_DIR}/completions $fpath)" >> $ZSHRC
+  echo "# initialise completions with ZSH's compinit" >> $ZSHRC
+  echo "autoload -Uz compinit && compinit" >> $ZSHRC
+
+  print "Install asdf done"
+
+  print "Adding asdf plugins"
+  # TODO add more plugins
+  # Perhaps handle plugins for the software themselves?
+  asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+  asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+  print "Adding asdf plugins done"
+}
+
+configure() {
+  # COFINGURE REDSHIFT?
+  print "Creating new group VIDEO & Add user to it for screen brightness control"
+  sudo usermod -a -G video $USER
+}
+
+install_all() {
+  install_essentials()
+  zsh()
+  install_asdf()
+  install_package_list()
+  install_emacs()
 }
