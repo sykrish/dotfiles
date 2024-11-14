@@ -21,7 +21,7 @@ libxcb-xkb-dev
 libxrandr-dev
 make
 pkg-config
-python
+python3
 ranger
 redshift
 silversearcher-ag
