@@ -1,10 +1,11 @@
 #/bin/bash
 
 ZSHRC="$HOME/.zshrc"
+GREEN='\033[0;32m'
+NC='\033[0m' # No color
 
 print() {
-  #echo -e "\n - $1\n"
-  printf "\n - $1\n"
+  printf "[${GREEN}info${NC}] - $1\n"
 }
 
 debug_stop() {
