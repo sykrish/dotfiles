@@ -199,10 +199,10 @@ configure() {
 install_all() {
   sudo apt-get update
   install_essentials
-  if [ $0 != '/usr/bin/zsh' ]; then
-    zsh
-  else
+  if [ -n "$ZSH_VERSION" ]; then
     configure_zsh
+  else
+    zsh
   fi
   install_asdf
   install_package_list
