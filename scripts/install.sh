@@ -57,6 +57,11 @@ zsh() {
   echo "Default shell: $SHELL"
   debug_stop
 
+  print "Zsh installed, enable zsh and continue the script"
+  exit 0
+}
+
+configure_zsh() {
   print "...and its plugins!"
   git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
@@ -194,7 +199,11 @@ configure() {
 install_all() {
   sudo apt-get update
   install_essentials
-  zsh
+  if [ $0 != '/usr/bin/zsh' ]; then
+    zsh
+  else
+    configure_zsh
+  fi
   install_asdf
   install_package_list
   install_emacs
