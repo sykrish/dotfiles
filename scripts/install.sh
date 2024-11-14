@@ -135,7 +135,7 @@ librewolf() {
 
 install_essentials() {
   print "Install essentials"
-  apt install curl
+  sudo apt install curl
 }
 
 install_package_list() {
