@@ -170,6 +170,7 @@ install_asdf() {
   echo "fpath=(${ASDF_DIR}/completions $fpath)" >> $ZSHRC
   echo "# initialise completions with ZSH's compinit" >> $ZSHRC
   echo "autoload -Uz compinit && compinit" >> $ZSHRC
+  source $ZSHRC
   debug_stop
 
   print "Install asdf done"
