@@ -66,6 +66,8 @@ configure_zsh() {
   print "...and its plugins!"
   git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
   debug_stop
 
   print "... enabling plugins."
@@ -173,12 +175,12 @@ install_asdf() {
   echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
   debug_stop
 
-  echo "# append completions to fpath" >> $ZSHRC
-  echo "fpath=(${ASDF_DIR}/completions $fpath)" >> $ZSHRC
-  echo "# initialise completions with ZSH's compinit" >> $ZSHRC
-  echo "autoload -Uz compinit && compinit" >> $ZSHRC
-  source $ZSHRC
-  debug_stop
+  # echo "# append completions to fpath" >> $ZSHRC
+  # echo "fpath=(${ASDF_DIR}/completions $fpath)" >> $ZSHRC
+  # echo "# initialise completions with ZSH's compinit" >> $ZSHRC
+  # echo "autoload -Uz compinit && compinit" >> $ZSHRC
+  # source $ZSHRC
+  # debug_stop
 
   print "Install asdf done"
 
