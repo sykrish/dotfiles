@@ -106,7 +106,7 @@ install_emacs() {
   print "Installing Emacs..."
   # asdf plugin add emacs
   # or
-  asdf plugin add emacs https://github.com/mimikun/asdf-emacs.git
+  asdf plugin-add emacs https://github.com/mimikun/asdf-emacs.git
   # Show all installable versions
   asdf list-all emacs
   debug_stop
@@ -188,7 +188,7 @@ install_asdf() {
   # TODO add more plugins
   # Perhaps handle plugins for the software themselves?
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
-  asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+  asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
   print "Adding asdf plugins done"
   debug_stop
 }
