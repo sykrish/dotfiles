@@ -7,7 +7,6 @@ cmake
 dunst
 fontconfig
 fonts-font-awesome 
-freetype2
 fzf
 grim
 grimshot
@@ -18,12 +17,9 @@ libncurses5-dev
 libpam0g-dev
 libssl-dev
 libx11-dev
-libxcb
 libxcb-xkb-dev
-libxkbcommon
 libxrandr-dev
 make
-nvim
 pkg-config
 python
 ranger
