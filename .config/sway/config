@@ -51,8 +51,8 @@ exec redshift -P -c ~/.config/redshift.conf
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 340 'notify-send "Locking in 60 seconds"' \
-         timeout 380 'notify-send "Locking in 20 seconds"' \
+         timeout 340 'notify-send -u low "Locking in 60 seconds"' \
+         timeout 380 'notify-send -u low "Locking in 20 seconds"' \
          timeout 400 'if [ -f /tmp/slock.lock ]; then echo "slock is already running"; else touch /tmp/slock.lock; slock; rm -f /tmp/slock.lock; fi' \
          timeout 520 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
          # timeout 400 'if [ $(pgrep slock) ]; then echo "slock is running"; else slock; fi' \
@@ -103,11 +103,14 @@ exec swayidle -w \
     # Start / Toggle Redshift
     bindsym $mod+m exec $(pgrep -x "redshift" > /dev/null \
     && pkill -USR1 "^redshift" \
-    && notify-send "Sent USR1 signal to redshift" \
+    && notify-send -u low "Sent USR1 signal to redshift" \
     || (redshift & notify-send "Started redshift"))
 
     # Make screenshot of area
     bindsym $mod+Shift+s exec $(grimshot copy area)
+
+    # Show current time with dunst
+    bindsym $mod+Shift+t notify-send -u low $(date +%d-%m-%y%n%H:%M)
 
     # Close last dunst notification
     bindsym $mod+Shift+d exec $(dunstctl close)

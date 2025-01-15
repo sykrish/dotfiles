@@ -3,6 +3,7 @@
 bookmarks=~/dotfiles/bookmarks/bookmarks.sh
 websites=~/dotfiles/bookmarks/websites
 monitors=~/dotfiles/bookmarks/monitors.sh
+todoist=~/dotfiles/bookmarks/todoist.sh
 tools=~/dotfiles/bookmarks/tools.sh
 edit=~/dotfiles/bookmarks/edit
 
@@ -29,11 +30,18 @@ case "$1" in
             | (xargs ~/dotfiles/bookmarks/monitors.sh)
 
         ;;
+
+    todoist)
+         $todoist \
+            | rofi -dmenu \
+            | (xargs ~/dotfiles/bookmarks/todoist.sh)
+
+        ;;
     tools)
 
         ;;
     *)
-        printf "websites\nedit\nmonitors" | rofi -dmenu | xargs $bookmarks
+        printf "websites\nedit\nmonitors\ntodoist" | rofi -dmenu | xargs $bookmarks
 
         ;;
 

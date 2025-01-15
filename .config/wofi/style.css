@@ -1,53 +1,75 @@
-window {
-margin: 15px;
-padding: 5px;
-border: 2px solid #333333;
-background-color: #333333;
+/* window { */
+/* margin: 15px; */
+/* padding: 5px; */
+/* border: 2px solid #333333; */
+/* background-color: #333333; */
+/* } */
+
+/* #input { */
+/* margin: 5px; */
+/* border: 2px solid #333333; */
+/* background-color: #333333; */
+/* color: #ffffff; */
+/* } */
+
+/* #inner-box { */
+/* margin: 5px; */
+/* border: 2px solid #333333; */
+/* background-color: #333333; */
+/* } */
+
+/* #scroll { */
+/* margin: 5px; */
+/* border: 2px solid #333333; */
+/* background-color: #333333; */
+/* } */
+
+/* #text { */
+/* margin: 5px; */
+/* color: white; */
+
+/* } */
+
+/* #entry:selected { */
+/* background-color: red; */
+/* padding-left: 5px; */
+/* padding-right: 5px; */
+/* color: white; */
+/* } */
+
+#window {
+    /* margin: 0; */
+    padding: 10px;
+    width: 1000px; /* Full width */
+    height: 1000px; /* Full height */
+    background-color: #ff1419; /* Base16 AYU Dark background */
 }
 
 #input {
-margin: 5px;
-border: 2px solid #333333;
-background-color: #333333;
-color: #ffffff;
+    margin: 5px;
+    background-color: #0f1419;
+    color: #e6e1cf; /* Light text color */
 }
 
 #inner-box {
-margin: 5px;
-border: 2px solid #333333;
-background-color: #333333;
+    margin: 5px;
+    background-color: #0f1419;
 }
 
-/* #outer-box { */
-/* margin: 5px; */
-/* border: 2px solid blue; */
-/* background-color: blue; */
-/* } */
-
 #scroll {
-margin: 5px;
-border: 2px solid #333333;
-background-color: #333333;
+    margin: 5px;
+    background-color: #0f1419;
 }
 
 #text {
-margin: 5px;
-/* border: 2px solid #ee5555; */
-/* background-color: #ee5555; */
-color: white;
-
+    margin: 5px;
+    color: #e6e1cf; /* Light text color */
 }
 
 #entry:selected {
-/* background-color: rgba(15,7,8,0); */
-background-color: red;
-padding-left: 5px;
-padding-right 5px;
-color: white;
+    background-color: #f29718; /* Vibrant orange for selection */
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #ffffff; /* White text on selected entry */
 }
 
-/* #text:selected { */
-/* padding: 5px; */
-/* border: 2px solid #ee5555; */
-/* /\* background-color: #ff9999; *\/ */
-/* } */
