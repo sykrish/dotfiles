@@ -126,7 +126,8 @@ install_essentials() {
 
 install_package_list() {
   print "install package list"
-  ../scripts/install_programs.sh;
+  ./install_programs.sh;
+  ./manual_installs/install_eza.sh
   debug_stop
 }
 
