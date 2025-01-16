@@ -173,7 +173,7 @@ configure() {
 create_system_links() {
   print "Will create system links now.."
   cd ../
-  make
+  make link
   cd -
   debug_stop
 }

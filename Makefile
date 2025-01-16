@@ -1,6 +1,9 @@
 
+install:
+	scripts/install_zsh.sh
+	scripts/install.sh
 
-all:
+link:
 	$(info installing asdf plugins)
 	rm $$HOME/.zshrc
 	stow --verbose --target=$$HOME --restow */
