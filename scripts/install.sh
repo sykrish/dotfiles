@@ -56,7 +56,7 @@ zsh() {
   # chsh -s /usr/bin/zsh
 
   print "Setting zsh as default"
-  chsh -s $(which zsh)
+  chsh -s $(which zsh) $USER
   exec zsh
   echo "Default shell: $SHELL"
   debug_stop
