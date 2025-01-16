@@ -5,6 +5,8 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No color
 ASDF_DIR="$HOME/.asdf"
 
+DIR=pwd
+
 print() {
   printf "[${GREEN}info${NC}] - $1\n"
 }
@@ -126,8 +128,8 @@ install_essentials() {
 
 install_package_list() {
   print "install package list"
-  ./install_programs.sh;
-  ./manual_installs/install_eza.sh
+  $DIR/scripts/install_programs.sh;
+  $DIR/scripts/manual_installs/install_eza.sh
   debug_stop
 }
 
