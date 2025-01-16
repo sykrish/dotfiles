@@ -112,7 +112,8 @@ install_emacs() {
   debug_stop
 
   # Install specific version
-  asdf install emacs latest
+  # asdf install emacs latest
+  asdf install emacs 29.4
 
   # Set a version globally (on your ~/.tool-versions file)
   asdf global emacs latest
@@ -170,7 +171,7 @@ install_package_list() {
 
 install_asdf() {
   print "Install asdf"
-  #git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
   # TODO check if echo goes correctly
   echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
   debug_stop
