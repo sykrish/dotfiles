@@ -18,11 +18,12 @@ print "Determine package-manager in env-var"
 source ../scripts/init.sh
 
 configure_nvim() {
+  print "Installing nvim"
+  asdf install neovim stable
   print "Configure nvim? [y/n]"
   read nvim_consent
   if [[ $nvim_consent == "Y" || $nvim_consent == "y" ]]; then
     print "Configuring nvim."
-    print "Configure Nvim"
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     ln -sv $PWD/.vimrc $HOME/.nvimrc
@@ -63,22 +64,23 @@ configure_git() {
 
 install_emacs() {
   print "Installing Emacs..."
+  print "SKIIPED FOR NOW"
   # asdf plugin add emacs
   # or
-  asdf plugin-add emacs https://github.com/mimikun/asdf-emacs.git
+  # asdf plugin-add emacs https://github.com/mimikun/asdf-emacs.git
   # Show all installable versions
-  asdf list-all emacs
-  debug_stop
+  # asdf list-all emacs
+  # debug_stop
 
   # Install specific version
   # asdf install emacs latest
-  asdf install emacs 29.4
+  # asdf install emacs 29.4
 
   # Set a version globally (on your ~/.tool-versions file)
-  asdf global emacs latest
+  # asdf global emacs latest
 
   # Now emacs commands are available
-  emacs --version
+  # emacs --version
   # cd ~/Downloads/
   # wget https://ftp.gnu.org/gnu/emacs/emacs-29.4.tar.xz
   # tar -xf emacs-29.4.tar.xz
@@ -90,10 +92,10 @@ install_emacs() {
   # make
   # print "Validate if emacs is installed correctly: ./src/emacs"
 
-  print "Installing Doom emacs..."
+  # print "Installing Doom emacs..."
 
-  git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
-  ~/.config/emacs/bin/doom install
+  # git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+  # ~/.config/emacs/bin/doom install
 
   print "Doom emacs done"
 }
@@ -156,6 +158,7 @@ install_asdf() {
   # Perhaps handle plugins for the software themselves?
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
   asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+  asdf plugin add neovim
   print "Adding asdf plugins done"
   debug_stop
 }
@@ -164,6 +167,14 @@ configure() {
   # COFINGURE REDSHIFT?
   print "Creating new group VIDEO & Add user to it for screen brightness control"
   sudo usermod -a -G video $USER
+}
+
+create_system_links() {
+  print "Will create system links now.."
+  cd ../
+  make
+  cd -
+  debug_stop
 }
 
 install_all() {
@@ -177,6 +188,8 @@ install_all() {
   install_asdf
   install_package_list
   install_emacs
+  create_system_links
+  configure_nvim
 }
 
 install_all
