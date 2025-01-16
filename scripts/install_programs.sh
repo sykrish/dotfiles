@@ -1,5 +1,7 @@
 #!/bin/sh
 
+DIR=$(pwd)
+
 if [ -x "$(command -v apt)" ]; then
     echo "package-manager: apt"
     export PACKAGE_MANAGER="apt"
@@ -12,6 +14,10 @@ else
     echo "Unsupported package manager"
     exit 1
 fi
+
+print() {
+  printf "[${GREEN}info${NC}] - $1\n"
+}
 
 print "Validating package-manager in env-var: $PACKAGE_MANAGER"
 echo $PACKAGE_MANAGER
@@ -26,7 +32,7 @@ mkdir $HOME/repos
 # done < pkglist
 
 echo "$(cat -n pkglist) "
-sudo $PACKAGE_MANAGER $INSTALL_FLAGS $(cat pkglist)
+sudo $PACKAGE_MANAGER $INSTALL_FLAGS $(cat $DIR/pkglist)
 
 # Add user to video group for screen brightness control
 
