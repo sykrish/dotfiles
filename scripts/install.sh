@@ -175,7 +175,7 @@ install_asdf() {
   # TODO check if echo goes correctly
   echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
   print "Source $ZSHRC so that asdf works"
-  source $ZSHRC
+  . $ZSHRC
   debug_stop
 
   # echo "# append completions to fpath" >> $ZSHRC
