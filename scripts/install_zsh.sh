@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-zsh() {
+install() {
   print "Installing zsh"
   sudo apt install zsh -y
 
@@ -44,3 +44,5 @@ configure_zsh() {
   echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >> $ZSHRC
   debug_stop
 }
+
+install
