@@ -20,7 +20,7 @@ install() {
   sudo apt install zsh -y
 
   print "Installing oh my zash"
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   # debug_stop
   # # Set ZSH as new default shell.
   # print "Setting ZSH as default shell..."
@@ -28,7 +28,6 @@ install() {
 
   print "Setting zsh as default"
   chsh -s $(which zsh) $USER
-  exec zsh
   echo "Default shell: $SHELL"
   debug_stop
 
