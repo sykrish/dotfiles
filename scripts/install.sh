@@ -171,9 +171,11 @@ install_package_list() {
 
 install_asdf() {
   print "Install asdf"
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0
   # TODO check if echo goes correctly
   echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
+  print "Source $ZSHRC so that asdf works"
+  source $ZSHRC
   debug_stop
 
   # echo "# append completions to fpath" >> $ZSHRC
