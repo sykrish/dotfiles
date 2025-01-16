@@ -170,14 +170,6 @@ configure() {
   sudo usermod -a -G video $USER
 }
 
-create_system_links() {
-  print "Will create system links now.."
-  cd ../
-  make link
-  cd -
-  debug_stop
-}
-
 install_all() {
   sudo apt-get update
   install_essentials
@@ -189,7 +181,6 @@ install_all() {
   install_asdf
   install_package_list
   install_emacs
-  create_system_links
   configure_nvim
 }
 

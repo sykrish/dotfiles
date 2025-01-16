@@ -1,4 +1,6 @@
 
+all: install link
+
 install:
 	scripts/install_zsh.sh
 	scripts/install.sh
