@@ -5,7 +5,7 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No color
 ASDF_DIR="$HOME/.asdf"
 
-DIR=pwd
+DIR=$(pwd)
 
 print() {
   printf "[${GREEN}info${NC}] - $1\n"
