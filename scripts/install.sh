@@ -1,4 +1,4 @@
-#/bin/zsh
+#!/bin/zsh
 
 ZSHRC="$HOME/.zshrc"
 GREEN='\033[0;32m'
