@@ -17,7 +17,7 @@ debug_stop() {
 }
 
 print "Determine package-manager in env-var"
-source ../scripts/init.sh
+source $DIR/scripts/init.sh
 
 configure_nvim() {
   print "Installing nvim"
