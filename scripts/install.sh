@@ -142,10 +142,10 @@ install_package_list() {
 install_asdf_plugin() {
   print "Installing asdf plugin.."
   name=$1
-  print "installing asdf plugin: $name"
+
 
   latest_version=$(asdf list all $name | grep -vE 'nightly|stable' | sort -V | tail -n 1)
-  echo "Latest version: $latest_version"
+  print "Latest version: $latest_version"
 
   asdf install $name $latest_version
   asdf global $name $latest_version
@@ -163,6 +163,7 @@ install_asdf() {
    . $ZSHRC
  fi
   source $ZSHRC
+  print "Install asdf done"
   debug_stop
 
   # echo "# append completions to fpath" >> $ZSHRC
@@ -172,15 +173,14 @@ install_asdf() {
   # source $ZSHRC
   # debug_stop
 
-  print "Install asdf done"
-
   print "Adding asdf plugins"
   # TODO add more plugins
   # Perhaps handle plugins for the software themselves?
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
   install_asdf_plugin elixir
   asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
-  install_asdf_plugin erlang
+  asdf install erlang 27.2
+  asdf global $name $latest_version
 
   asdf plugin add neovim
   print "Adding asdf plugins done"

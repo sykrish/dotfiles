@@ -6,10 +6,14 @@ install:
 	scripts/install.sh
 
 link:
-	$(info Creating links)
 	$(info Deleting .zshrc since it will get a linked version)
 	rm $$HOME/.zshrc
+
+	$(info Creating links)
 	stow --verbose --target=$$HOME --restow */
+	stow --verbose --target=$$HOME/.config --restow .config
 
 delete:
+	$(info Deleting links)
 	stow --verbose --target=$$HOME --delete */
+	stow --verbose --target=$$HOME/.config --delete .config
