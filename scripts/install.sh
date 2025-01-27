@@ -141,7 +141,7 @@ install_package_list() {
 
 install_asdf_plugin() {
   print "Installing asdf plugin.."
-  name = $1
+  name=$1
   print "installing asdf plugin: $name"
 
   latest_version=$(asdf list all $name | grep -vE 'nightly|stable' | sort -V | tail -n 1)
