@@ -20,20 +20,25 @@ print "Determine package-manager in env-var"
 source $DIR/scripts/init.sh
 
 configure_nvim() {
-  print "Installing nvim"
-  asdf install neovim stable
-  print "Configure nvim? [y/n]"
-  read nvim_consent
-  if [[ $nvim_consent == "Y" || $nvim_consent == "y" ]]; then
-    print "Configuring nvim."
+  print "Installing neovim"
+
+  latest_version=$(asdf list all neovim | grep -vE 'nightly|stable' | sort -V | tail -n 1)
+  echo "Latest version: $latest_version"
+
+  asdf install neovim $latest_version
+
+  print "Configure neovim? [y/n]"
+  read neovim_consent
+  if [[ $neovim_consent == "Y" || $neovim_consent == "y" ]]; then
+    print "Configuring neovim."
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     ln -sv $PWD/.vimrc $HOME/.nvimrc
-    nvim --cmd PluginInstall --cmd qall
+    neovim --cmd PluginInstall --cmd qall
     print "Configure Nvim done"
     print "OK."
   else
-    print "Skipping configuring nvim."
+    print "Skipping configuring neovim."
   fi
 
 }
