@@ -6,7 +6,8 @@ install:
 	scripts/install.sh
 
 link:
-	$(info installing asdf plugins)
+	$(info Creating links)
+	$(info Deleting .zshrc since it will get a linked version)
 	rm $$HOME/.zshrc
 	stow --verbose --target=$$HOME --restow */
 
