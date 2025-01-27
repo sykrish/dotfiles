@@ -177,6 +177,11 @@ configure() {
   sudo usermod -a -G video $USER
 }
 
+update_zsh_dotfiles() {
+  echo "export DOTFILES=$DOTFILES" >> $DOTFILES/home/.zshrc
+  echo "source $DOTFILES/.alias" >> $DOTFILES/home/.zshrc
+}
+
 install_all() {
   sudo apt-get update
   install_essentials

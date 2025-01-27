@@ -13,3 +13,6 @@ else
     echo "Unsupported package manager"
     exit 1
 fi
+
+export DOTFILES=$(pwd)
+echo "Path of dotfiles set: $DOTFILES"
