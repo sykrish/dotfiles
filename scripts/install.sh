@@ -178,9 +178,9 @@ install_asdf() {
   # TODO add more plugins
   # Perhaps handle plugins for the software themselves?
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
-  install_asdf_plugin("elixir")
+  install_asdf_plugin elixir
   asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
-  install_asdf_plugin("erlang")
+  install_asdf_plugin erlang
 
   asdf plugin add neovim
   print "Adding asdf plugins done"
