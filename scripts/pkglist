@@ -1,6 +1,7 @@
 alacritty
 autojump
 automake
+bat
 brightnessctl
 build-essential
 cmake
@@ -24,6 +25,7 @@ pkg-config
 python3
 ranger
 redshift
+rofi
 silversearcher-ag
 slurp
 stow

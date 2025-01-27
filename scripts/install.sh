@@ -20,6 +20,7 @@ print "Determine package-manager in env-var"
 source $DIR/scripts/init.sh
 
 configure_nvim() {
+  #FIXME vimrc errors
   print "Installing neovim"
 
   latest_version=$(asdf list all neovim | grep -vE 'nightly|stable' | sort -V | tail -n 1)
@@ -119,7 +120,7 @@ check_continue() {
   done
 }
 
-librewolf() {
+install_librewolf() {
   print "Installing librewolf"
   sudo apt update && sudo apt install extrepo -y
   sudo extrepo enable librewolf
@@ -178,16 +179,20 @@ install_asdf() {
   # Perhaps handle plugins for the software themselves?
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
   install_asdf_plugin elixir
+
   asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
-  asdf install erlang 27.2
-  asdf global $name $latest_version
+
+  print "Skipped erlang installation"
+  # FIXME erlang seems to cause problems installing it through script
+  # asdf install erlang 27.2
+  # asdf global $name $latest_version
 
   asdf plugin add neovim
   print "Adding asdf plugins done"
   debug_stop
 }
 
-configure() {
+configure_reshift() {
   # COFINGURE REDSHIFT?
   print "Creating new group VIDEO & Add user to it for screen brightness control"
   sudo usermod -a -G video $USER
@@ -209,8 +214,10 @@ install_all() {
   update_zsh_dotfiles
   install_asdf
   install_package_list
+  install_librewolf
   install_emacs
   configure_nvim
+  configure_reshift
 }
 
 install_all
