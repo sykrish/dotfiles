@@ -205,7 +205,7 @@ install_all() {
   elif [ -n "$BASH_VERSION" ]; then
     ./install_zsh.sh
   fi
-  update_zsh_dotfiles()
+  update_zsh_dotfiles
   install_asdf
   install_package_list
   install_emacs
