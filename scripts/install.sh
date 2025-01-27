@@ -140,6 +140,7 @@ install_package_list() {
 }
 
 install_asdf_plugin() {
+  print "Installing asdf plugin.."
   name = $1
   print "installing asdf plugin: $name"
 
