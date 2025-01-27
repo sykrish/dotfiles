@@ -26,6 +26,7 @@ configure_nvim() {
   echo "Latest version: $latest_version"
 
   asdf install neovim $latest_version
+  asdf global neovim $latest_version
 
   print "Configure neovim? [y/n]"
   read neovim_consent
@@ -138,6 +139,17 @@ install_package_list() {
   debug_stop
 }
 
+install_asdf_plugin() {
+  name = $1
+  print "installing asdf plugin: $name"
+
+  latest_version=$(asdf list all $name | grep -vE 'nightly|stable' | sort -V | tail -n 1)
+  echo "Latest version: $latest_version"
+
+  asdf install $name $latest_version
+  asdf global $name $latest_version
+}
+
 install_asdf() {
   print "Install asdf"
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0
@@ -165,7 +177,10 @@ install_asdf() {
   # TODO add more plugins
   # Perhaps handle plugins for the software themselves?
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+  install_asdf_plugin("elixir")
   asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+  install_asdf_plugin("erlang")
+
   asdf plugin add neovim
   print "Adding asdf plugins done"
   debug_stop
@@ -190,6 +205,7 @@ install_all() {
   elif [ -n "$BASH_VERSION" ]; then
     ./install_zsh.sh
   fi
+  update_zsh_dotfiles()
   install_asdf
   install_package_list
   install_emacs
