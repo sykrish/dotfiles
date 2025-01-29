@@ -1,30 +1,21 @@
 #!/bin/zsh
 
 ZSHRC="$HOME/.zshrc"
-GREEN='\033[0;32m'
-NC='\033[0m' # No color
 ASDF_DIR="$HOME/.asdf"
 
 DIR=$(pwd)
 
-print() {
-  printf "[${GREEN}info${NC}] - $1\n"
-}
+. scripts/io.sh
 
-debug_stop() {
-  print "Press enter to continue"
-  read test
-}
-
-print "Determine package-manager in env-var"
+info "Determine package-manager in env-var"
 source $DIR/scripts/init.sh
 
 configure_nvim() {
   #FIXME vimrc errors
-  print "Installing neovim"
+  info "Installing neovim"
 
   latest_version=$(asdf list all neovim | grep -vE 'nightly|stable' | sort -V | tail -n 1)
-  echo "Latest version: $latest_version"
+  print "Latest version: $latest_version"
 
   asdf install neovim $latest_version
   asdf global neovim $latest_version
@@ -40,19 +31,10 @@ configure_nvim() {
     print "Configure Nvim done"
     print "OK."
   else
-    print "Skipping configuring neovim."
+    warn "Skipping configuring neovim."
   fi
 
 }
-
-# print "Creating links for dotfiles"
-# ln -sv $PWD/templates/.gitmessage.txt $HOME
-# ln -sv $PWD/.alias $HOME
-# ln -sv $PWD/.env_vars $HOME
-
-# print "Moving .config folder, this will overwrite existing"
-# cp -r .config/* $HOME/.config
-
 
 configure_git() {
   print "Please enter gitconfigs:"
@@ -72,8 +54,8 @@ configure_git() {
 }
 
 install_emacs() {
-  print "Installing Emacs..."
-  print "SKIIPED FOR NOW"
+  info "Installing Emacs..."
+  warn "SKIIPED FOR NOW"
   # asdf plugin add emacs
   # or
   # asdf plugin-add emacs https://github.com/mimikun/asdf-emacs.git
@@ -121,7 +103,7 @@ check_continue() {
 }
 
 install_librewolf() {
-  print "Installing librewolf"
+  info "Installing librewolf"
   sudo apt update && sudo apt install extrepo -y
   sudo extrepo enable librewolf
   sudo apt update && sudo apt install librewolf -y
@@ -129,19 +111,21 @@ install_librewolf() {
 }
 
 install_essentials() {
-  print "Install essentials"
+  info "Install essentials"
   sudo apt install curl -y
+  print "done"
 }
 
 install_package_list() {
-  print "install package list"
+  info "install package list"
   $DIR/scripts/install_programs.sh;
   $DIR/scripts/manual_installs/install_eza.sh
   debug_stop
+  print "done"
 }
 
 install_asdf_plugin() {
-  print "Installing asdf plugin.."
+  info "Installing asdf plugin.."
   name=$1
 
 
@@ -153,7 +137,7 @@ install_asdf_plugin() {
 }
 
 install_asdf() {
-  print "Install asdf"
+  info "Install asdf"
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0
   # TODO check if echo goes correctly
   echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
@@ -174,7 +158,7 @@ install_asdf() {
   # source $ZSHRC
   # debug_stop
 
-  print "Adding asdf plugins"
+  info "Adding asdf plugins"
   # TODO add more plugins
   # Perhaps handle plugins for the software themselves?
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
@@ -182,7 +166,7 @@ install_asdf() {
 
   asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
 
-  print "Skipped erlang installation"
+  warn "Skipped erlang installation"
   # FIXME erlang seems to cause problems installing it through script
   # asdf install erlang 27.2
   # asdf global $name $latest_version
@@ -194,7 +178,7 @@ install_asdf() {
 
 configure_reshift() {
   # COFINGURE REDSHIFT?
-  print "Creating new group VIDEO & Add user to it for screen brightness control"
+  info "Creating new group VIDEO & Add user to it for screen brightness control"
   sudo usermod -a -G video $USER
 }
 

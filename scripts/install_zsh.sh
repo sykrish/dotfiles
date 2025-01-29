@@ -1,22 +1,14 @@
 #!/usr/bin/env bash
 
+. scripts/io.sh
 
 ZSHRC="$HOME/.zshrc"
 GREEN='\033[0;32m'
 NC='\033[0m' # No color
 ASDF_DIR="$HOME/.asdf"
 
-print() {
-  printf "[${GREEN}info${NC}] - $1\n"
-}
-
-debug_stop() {
-  print "Press enter to continue"
-  read test
-}
-
 install() {
-  print "Installing zsh"
+  info "Installing zsh"
   sudo apt install zsh -y
 
   print "Installing oh my zash"
