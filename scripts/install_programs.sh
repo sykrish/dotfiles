@@ -1,17 +1,17 @@
 #!/bin/sh
 
+. scripts/io.sh
+
 DIR=$(pwd)
 
 if [ -x "$(command -v apt)" ]; then
-    echo "package-manager: apt"
     export PACKAGE_MANAGER="apt"
     export INSTALL_FLAGS="install"
 elif [ -x "$(command -v pacman)" ]; then
-    echo "package-manager: pacman"
     export PACKAGE_MANAGER="pacman"
     export INSTALL_FLAGS="-S --noconfirm"
 else
-    echo "Unsupported package manager"
+    error "Unsupported package manager"
     exit 1
 fi
 
@@ -19,9 +19,9 @@ print() {
   printf "[${GREEN}info${NC}] - $1\n"
 }
 
-print "Validating package-manager in env-var: $PACKAGE_MANAGER"
-echo $PACKAGE_MANAGER
-echo $INSTALL_FLAGS
+info "Validating package-manager in env-var: $PACKAGE_MANAGER"
+print $PACKAGE_MANAGER
+print $INSTALL_FLAGS
 
 # Create a directory to store repositories
 mkdir $HOME/repos
