@@ -1,75 +1,98 @@
-/* window { */
-/* margin: 15px; */
-/* padding: 5px; */
-/* border: 2px solid #333333; */
-/* background-color: #333333; */
-/* } */
+@import url('~/.cache/wal/colors-waybar.css');
 
-/* #input { */
-/* margin: 5px; */
-/* border: 2px solid #333333; */
-/* background-color: #333333; */
-/* color: #ffffff; */
-/* } */
-
-/* #inner-box { */
-/* margin: 5px; */
-/* border: 2px solid #333333; */
-/* background-color: #333333; */
-/* } */
-
-/* #scroll { */
-/* margin: 5px; */
-/* border: 2px solid #333333; */
-/* background-color: #333333; */
-/* } */
-
-/* #text { */
-/* margin: 5px; */
-/* color: white; */
-
-/* } */
-
-/* #entry:selected { */
-/* background-color: red; */
-/* padding-left: 5px; */
-/* padding-right: 5px; */
-/* color: white; */
-/* } */
-
-#window {
-    /* margin: 0; */
-    padding: 10px;
-    width: 1000px; /* Full width */
-    height: 1000px; /* Full height */
-    background-color: #ff1419; /* Base16 AYU Dark background */
+@define-color mauve  @color9;
+@define-color red  @color9;
+@define-color lavender  @color7;
+@define-color text  @color7;
+@define-color test @color2
+@keyframes fadeIn {
+    0% {
+    }
+    100% {
+    }
 }
 
-#input {
-    margin: 5px;
-    background-color: #0f1419;
-    color: #e6e1cf; /* Light text color */
+* {
+    font-family: 'CodeNewRoman Nerd Font Mono', monospace;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    text-shadow:none;
+    border-radius: 20px;
+    background-color: #0b090b;
 }
 
+window {
+    all:unset;
+    padding: 20px;
+    border-radius: 0px;
+    background-color: alpha(@background,.5);
+}
 #inner-box {
-    margin: 5px;
-    background-color: #0f1419;
+    margin: 2px;
+    padding: 5px
+    border: none;
 }
-
+#outer-box {    
+    border: none;
+}
 #scroll {
-    margin: 5px;
-    background-color: #0f1419;
+    margin: 0px;
+    padding: 30px;
+    border: none;
+}
+#input {
+    all:unset;
+    margin-left:20px;
+    margin-right:20px;
+    margin-top:20px;
+    padding: 20px;
+    border: none;
+    outline: none;
+    color: @text;
+    /* box-shadow: 1px 1px 5px rgba(0, 0, 0, .5); */
+    border-radius:10;
+    /* background-color: alpha(@background,.2); */
+}
+#input image {
+    border: none;
+    color: @red;
+}
+#input * {
+    border: none;
+    outline: none;
 }
 
+#input:focus {
+    outline: none;
+    border: none;
+    border-radius:10;
+}
 #text {
     margin: 5px;
-    color: #e6e1cf; /* Light text color */
+    border: none;
+    color: @text;
+    outline: none;
 }
+#entry {
+    border: none;
+    margin: 5px;
+    padding-left: 10px;
+}
+#entry arrow {
+    border: none;
+    color: @lavender;
 
+}
 #entry:selected {
-    background-color: #f29718; /* Vibrant orange for selection */
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #ffffff; /* White text on selected entry */
+    box-shadow: 1px 1px 5px rgba(255,255,255, .03);
+    border: none;
+    border-radius: 20px;
+    /* background-color:transparent; */
 }
-
+#entry:selected #text {
+    color: #09836B;
+}
+#entry:drop(active) {
+    background-color: @lavender !important;
+}
