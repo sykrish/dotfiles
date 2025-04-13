@@ -80,7 +80,7 @@ install_essentials() {
 
 install_package_list() {
   info "install package list"
-  $DIR/scripts/install_programs.sh;
+  $DIR/scripts/install_programs.sh
   $DIR/scripts/manual_installs/install_eza.sh
   debug_stop
   print "done"
@@ -100,14 +100,16 @@ install_asdf_plugin() {
 install_asdf() {
   info "Install asdf"
 
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0 1>/dev/null
 
-  echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
+  echo '. "$HOME/.asdf/asdf.sh"' >>$ZSHRC
   print "Source $ZSHRC so that asdf works"
   if [[ "$SHELL" == *zsh ]]; then
     source $ZSHRC
+    source $HOME/.asdf/asdf.sh
   else
     . $ZSHRC
+    . $HOME/.asdf/asdf.sh
   fi
   source $ZSHRC
 
@@ -138,8 +140,8 @@ configure_reshift() {
 }
 
 update_zsh_dotfiles() {
-  echo "export DOTFILES=$DOTFILES" >> $DOTFILES/home/.zshrc
-  echo "source $DOTFILES/.alias" >> $DOTFILES/home/.zshrc
+  echo "export DOTFILES=$DOTFILES" >>$DOTFILES/home/.zshrc
+  echo "source $DOTFILES/.alias" >>$DOTFILES/home/.zshrc
 }
 
 install_all() {
