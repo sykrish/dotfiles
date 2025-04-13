@@ -38,6 +38,9 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+                                        ; Bind helm AG to CTRL+A
+(global-set-key (kbd "C-a") 'helm-ag-project-root)
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
@@ -82,7 +85,6 @@
 
 (use-package lsp-mode
   :commands lsp
-  :ensure t
   :diminish lsp-mode
   :hook
   (elixir-mode . lsp)
@@ -92,6 +94,33 @@
 (setq lsp-elixir-suggest-specs 0)
 (setq lsp-elixir-enable-test-lenses 1)
 (setq elixir-format-hook 1)
+(setq lsp-format-on-save 1)  ;; Add this line
+
+;; (add-hook 'elixir-mode-hook #'lsp)
+(add-hook 'elixir-ts-mode-hook
+          (lambda ()
+            (message "stefan elixir-mode-hook executed")
+            (lsp)))
+
+(setq lsp-file-watch-ignored-directories
+      '(".idea" ".ensime_cache" ".eunit" "node_modules"
+        ".git" ".hg" ".fslckout" "_FOSSIL_"
+        ".bzr" "_darcs" ".tox" ".svn" ".stack-work"
+        "build" "_build" "deps" "postgres-data")
+      )
+
+;; CREDO for Elixir
+;; Workaround to enable running credo after lsp
+;; (defvar-local my/flycheck-local-cache nil
+;; (defun my/flycheck-checker-get (fn checker property)
+;;   (or (alist-get property (alist-get checker my/flycheck-local-cache))
+;;       (funcall fn checker property)))
+;; (advice-add 'flycheck-checker-get :around 'my/flycheck-checker-get)
+;; (add-hook 'lsp-managed-mode-hook
+;;           (lambda ()
+;;             (when (derived-mode-p 'elixir-ts-mode)
+;;               (setq my/flycheck-local-cache '((lsp . ((next-checkers . (elixir-credo)))))))
+;;             ))
 
 ;;
 ;; ORG MODE
@@ -133,3 +162,6 @@
 
 (blink-cursor-mode 1)
 (setq blink-cursor-interval .4)
+
+                                        ; Do not keep dired buffer when opening file
+(setf dired-kill-when-opening-new-dired-buffer 0)
