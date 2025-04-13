@@ -53,3 +53,17 @@ libxpm-dev
 libxrender-dev
 libxt-dev
 texinfo
+
+# hyprland
+hyprcursor
+hyprgraphics
+hyprland
+hyprland-qt-support
+hyprland-qtutils
+hyprlang
+hyprlock
+hyprpaper
+hyprpicker
+hyprsunset
+hyprutils
+hyprwayland-scanner
