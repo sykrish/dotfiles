@@ -18,7 +18,7 @@ configure_nvim() {
   print "Latest version: $latest_version"
 
   asdf install neovim $latest_version
-  asdf global neovim $latest_version
+  asdf set neovim $latest_version
 
   print "Configure neovim? [y/n]"
   read neovim_consent
