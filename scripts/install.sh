@@ -100,7 +100,7 @@ install_asdf_plugin() {
 install_asdf() {
   info "Install asdf"
 
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0 1>/dev/null
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.16.0 1>/dev/null
 
   echo '. "$HOME/.asdf/asdf.sh"' >>$ZSHRC
   print "Source $ZSHRC so that asdf works"
