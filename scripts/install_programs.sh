@@ -16,7 +16,7 @@ else
 fi
 
 print() {
-  printf "[${GREEN}info${NC}] - $1\n"
+    printf "[${GREEN}info${NC}] - $1\n"
 }
 
 info "Validating package-manager in env-var: $PACKAGE_MANAGER"
@@ -24,17 +24,22 @@ print $PACKAGE_MANAGER
 print $INSTALL_FLAGS
 
 # Create a directory to store repositories
-mkdir $HOME/repos
+mkdir $HOME/repos 2>/dev/null
 
-# Install additional programs from txt file
-# while read -r program; do
-#     sudo $PACKAGE_MANAGER $INSTALL_FLAGS "$program"
-# done < pkglist
+. scripts/manual_installs/check_hyprland.sh 2>/dev/null
 
-echo "$(cat -n $DIR/scripts/pkglist) "
-sudo $PACKAGE_MANAGER $INSTALL_FLAGS $(cat $DIR/scripts/pkglist)
+pkglist=$(cat $DIR/scripts/pkglist | grep -vE '#')
 
-# Add user to video group for screen brightness control
+if [ "$INSTALL_HYPRLAND" -eq 1 ]; then
+    hyprland_pkglist=$(cat $DIR/scripts/pkglist_hyprland | grep -vE '#')
+    pkglist="${pkglist}${hyprland_pkglist}"
+fi
+
+# TODO print with number echo "$(cat -n $DIR/scripts/pkglist) "
+info "Packages to install"
+echo "$pkglist"
+
+sudo $PACKAGE_MANAGER $INSTALL_FLAGS $pkglist
 
 # Clone slock repository
 # git clone https://git.suckless.org/slock $HOME/repos/slock
