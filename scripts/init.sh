@@ -8,6 +8,7 @@ if [ -x "$(command -v apt)" ]; then
     export PACKAGE_MANAGER="apt-get"
     export INSTALL_FLAGS="-q=2 install"
 elif [ -x "$(command -v pacman)" ]; then
+    # MAKE SURE TO INSTALL YAY TOO
     info "package-manager: pacman"
     export PACKAGE_MANAGER="pacman"
     export INSTALL_FLAGS="-S --noconfirm"
