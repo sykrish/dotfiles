@@ -57,9 +57,9 @@ check_continue() {
   while true; do
     read -p "Do you wish to install this program? " yn
     case $yn in
-        [Yy]* ) break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
+    [Yy]*) break ;;
+    [Nn]*) exit ;;
+    *) echo "Please answer yes or no." ;;
     esac
   done
 }
@@ -80,7 +80,7 @@ install_essentials() {
 
 install_package_list() {
   info "install package list"
-  $DIR/scripts/install_programs.sh;
+  $DIR/scripts/install_programs.sh
   $DIR/scripts/manual_installs/install_eza.sh
   debug_stop
   print "done"
@@ -100,9 +100,16 @@ install_asdf_plugin() {
 install_asdf() {
   info "Install asdf"
 
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0
+  # download
+  file=$(wget -q -O- https://github.com/asdf-vm/asdf/releases/download/v0.16.7/asdf-v0.16.7-linux-amd64.tar.gz | tar xvz)
+  mkdir $HOME/bin
+  cp file $HOME/bin
 
-  echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
+  # update path for running shell
+  export PATH="$HOME/bin:$PATH"
+
+  # echo '. "$HOME/.asdf/asdf.sh"' >>$ZSHRC
+  'export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"' >>$ZSHRC
   print "Source $ZSHRC so that asdf works"
   if [[ "$SHELL" == *zsh ]]; then
     source $ZSHRC
@@ -110,6 +117,9 @@ install_asdf() {
     . $ZSHRC
   fi
   source $ZSHRC
+
+  mkdir -p "${ASDF_DATA_DIR:-$HOME/.asdf}/completions"
+  asdf completion zsh >"${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf"
 
   print "Install asdf done"
   debug_stop
@@ -138,8 +148,8 @@ configure_reshift() {
 }
 
 update_zsh_dotfiles() {
-  echo "export DOTFILES=$DOTFILES" >> $DOTFILES/home/.zshrc
-  echo "source $DOTFILES/.alias" >> $DOTFILES/home/.zshrc
+  echo "export DOTFILES=$DOTFILES" >>$DOTFILES/home/.zshrc
+  echo "source $DOTFILES/.alias" >>$DOTFILES/home/.zshrc
 }
 
 install_all() {
