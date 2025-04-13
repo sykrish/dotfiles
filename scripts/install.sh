@@ -103,7 +103,7 @@ install_asdf() {
   # download
   file=$(wget -q -O- https://github.com/asdf-vm/asdf/releases/download/v0.16.7/asdf-v0.16.7-linux-amd64.tar.gz | tar xvz)
   mkdir $HOME/bin
-  cp file $HOME/bin
+  cp $file $HOME/bin
 
   # update path for running shell
   export PATH="$HOME/bin:$PATH"
