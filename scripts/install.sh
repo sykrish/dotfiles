@@ -53,44 +53,6 @@ configure_git() {
   print "Configure git: done"
 }
 
-install_emacs() {
-  info "Installing Emacs..."
-  warn "SKIIPED FOR NOW"
-  # asdf plugin add emacs
-  # or
-  # asdf plugin-add emacs https://github.com/mimikun/asdf-emacs.git
-  # Show all installable versions
-  # asdf list-all emacs
-  # debug_stop
-
-  # Install specific version
-  # asdf install emacs latest
-  # asdf install emacs 29.4
-
-  # Set a version globally (on your ~/.tool-versions file)
-  # asdf global emacs latest
-
-  # Now emacs commands are available
-  # emacs --version
-  # cd ~/Downloads/
-  # wget https://ftp.gnu.org/gnu/emacs/emacs-29.4.tar.xz
-  # tar -xf emacs-29.4.tar.xz
-  # cd emacs-29.4
-
-  # ./configure
-  # check_continue()
-
-  # make
-  # print "Validate if emacs is installed correctly: ./src/emacs"
-
-  # print "Installing Doom emacs..."
-
-  # git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
-  # ~/.config/emacs/bin/doom install
-
-  print "Doom emacs done"
-}
-
 check_continue() {
   while true; do
     read -p "Do you wish to install this program? " yn
@@ -128,7 +90,6 @@ install_asdf_plugin() {
   info "Installing asdf plugin.."
   name=$1
 
-
   latest_version=$(asdf list all $name | grep -vE 'nightly|stable' | sort -V | tail -n 1)
   print "Latest version: $latest_version"
 
@@ -138,29 +99,23 @@ install_asdf_plugin() {
 
 install_asdf() {
   info "Install asdf"
+
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0
-  # TODO check if echo goes correctly
+
   echo '. "$HOME/.asdf/asdf.sh"' >> $ZSHRC
   print "Source $ZSHRC so that asdf works"
- if [[ "$SHELL" == *zsh ]]; then
+  if [[ "$SHELL" == *zsh ]]; then
     source $ZSHRC
- else
-   . $ZSHRC
- fi
+  else
+    . $ZSHRC
+  fi
   source $ZSHRC
+
   print "Install asdf done"
   debug_stop
 
-  # echo "# append completions to fpath" >> $ZSHRC
-  # echo "fpath=(${ASDF_DIR}/completions $fpath)" >> $ZSHRC
-  # echo "# initialise completions with ZSH's compinit" >> $ZSHRC
-  # echo "autoload -Uz compinit && compinit" >> $ZSHRC
-  # source $ZSHRC
-  # debug_stop
-
   info "Adding asdf plugins"
   # TODO add more plugins
-  # Perhaps handle plugins for the software themselves?
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
   install_asdf_plugin elixir
 
@@ -199,7 +154,6 @@ install_all() {
   install_asdf
   install_package_list
   install_librewolf
-  install_emacs
   configure_nvim
   configure_reshift
 }
