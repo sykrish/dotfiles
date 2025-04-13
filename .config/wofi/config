@@ -1,2 +1,13 @@
-fullscreen=true
-lines=1
+[config]
+allow_images=false
+width=600
+show=drun
+prompt=Search
+height=600
+always_parse_args=true
+show_all=true
+term=alacritty
+hide_scroll=true
+print_command=true
+insensitive=true
+columns=1
