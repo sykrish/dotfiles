@@ -8,6 +8,9 @@ NC='\033[0m' # No color
 ASDF_DIR="$HOME/.asdf"
 
 install() {
+  # Ensure file exists
+  touch $ZSHRC
+
   info "Installing zsh"
   sudo apt install zsh -y
 
@@ -42,13 +45,13 @@ configure_zsh() {
   debug_stop
 
   print "Append settings to .zsh file"
-  echo "# Appended by install script." >> $ZSHRC
+  echo "# Appended by install script." >>$ZSHRC
 
   print "Env vars are managed by .zshrc file."
-  echo "if [ -f $HOME/.env_vars ]; then source $HOME/.env_vars; fi" >> $ZSHRC
+  echo "if [ -f $HOME/.env_vars ]; then source $HOME/.env_vars; fi" >>$ZSHRC
 
   print "Add aliases to .zshrc file"
-  echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >> $ZSHRC
+  echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >>$ZSHRC
   debug_stop
 }
 
