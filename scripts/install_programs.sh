@@ -32,7 +32,7 @@ mkdir $HOME/repos
 # done < pkglist
 
 echo "$(cat -n $DIR/scripts/pkglist) "
-sudo $PACKAGE_MANAGER $INSTALL_FLAGS $(cat $DIR/scripts/pkglist)
+sudo $PACKAGE_MANAGER $INSTALL_FLAGS $(cat $DIR/scripts/pkglist | grep -vE '#')
 
 # Add user to video group for screen brightness control
 
