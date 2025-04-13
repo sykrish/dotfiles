@@ -129,7 +129,7 @@ install_asdf() {
   asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
   install_asdf_plugin elixir
 
-  asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+  asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
 
   warn "Skipped erlang installation"
   # FIXME erlang seems to cause problems installing it through script
