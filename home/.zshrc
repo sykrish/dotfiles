@@ -116,11 +116,13 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 #use keychain to setup ssh-agent + keys. required for sway
 # eval 'keychain --eval betty_gitlab'
 
-# enable autojump 
+# enable autojump
 [ -f /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh ] && . /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
 export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
