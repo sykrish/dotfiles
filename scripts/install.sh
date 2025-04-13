@@ -94,7 +94,7 @@ install_asdf_plugin() {
   print "Latest version: $latest_version"
 
   asdf install $name $latest_version
-  asdf global $name $latest_version
+  asdf set $name $latest_version
 }
 
 install_asdf() {
@@ -109,7 +109,7 @@ install_asdf() {
   export PATH="$HOME/bin:$PATH"
 
   # echo '. "$HOME/.asdf/asdf.sh"' >>$ZSHRC
-  'export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"' >>$ZSHRC
+  echo 'export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"' >>$ZSHRC
   print "Source $ZSHRC so that asdf works"
   if [[ "$SHELL" == *zsh ]]; then
     source $ZSHRC
@@ -119,14 +119,14 @@ install_asdf() {
   source $ZSHRC
 
   mkdir -p "${ASDF_DATA_DIR:-$HOME/.asdf}/completions"
-  asdf completion zsh >"${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf"
+  $HOME/bin/asdf completion zsh >"${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf"
 
   print "Install asdf done"
   debug_stop
 
   info "Adding asdf plugins"
   # TODO add more plugins
-  asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+  asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
   install_asdf_plugin elixir
 
   asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
