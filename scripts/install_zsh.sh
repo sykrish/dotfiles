@@ -38,11 +38,11 @@ configure_zsh() {
   git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
 
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-  debug_stop
+  # debug_stop
 
   print "... enabling plugins."
   sed -i 's/plugins=(git)/plugins=(zsh-syntax-highlighting zsh-autosuggestions mix colored-man-pages git shrink-path fzf-zsh-plugin asdf)/' $ZSHRC
-  debug_stop
+  # debug_stop
 
   print "Append settings to .zsh file"
   echo "# Appended by install script." >>$ZSHRC
@@ -52,7 +52,10 @@ configure_zsh() {
 
   print "Add aliases to .zshrc file"
   echo "if [ -f $HOME/.alias ]; then source $HOME/.alias; fi" >>$ZSHRC
-  debug_stop
+
+  touch "$HOME/.env.local"
+
+  # debug_stop
 }
 
 install
