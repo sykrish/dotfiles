@@ -122,7 +122,7 @@ install_asdf() {
   $HOME/bin/asdf completion zsh >"${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf"
 
   print "Install asdf done"
-  debug_stop
+  # debug_stop
 
   info "Adding asdf plugins"
   # TODO add more plugins

@@ -113,11 +113,9 @@ if [ -f $HOME/.alias ]; then source $HOME/.alias; fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-#use keychain to setup ssh-agent + keys. required for sway
-# eval 'keychain --eval betty_gitlab'
-
-# enable autojump
+# enable autojump REVIEW probably remove linuxbrew
 [ -f /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh ] && . /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh
+[ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
