@@ -111,7 +111,7 @@ if [ -f $HOME/.env_vars ]; then source $HOME/.env_vars; fi
 if [ -f $HOME/.alias ]; then source $HOME/.alias; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -f $HOME/linuxbrew/.linuxbrew/bin/brew] && eval "$($HOME/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # enable autojump REVIEW probably remove linuxbrew
 [ -f /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh ] && . /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh
