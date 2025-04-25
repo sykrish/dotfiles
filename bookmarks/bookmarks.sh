@@ -41,6 +41,12 @@ tools) ;;
 
 \
     *)
+
+    if [[ $BOOKMARK_EXIT == "true" ]]; then
+        exit 0
+    fi
+    export BOOKMARK_EXIT=true
+
     if [ -x "$(command -v todoist)" ]; then
         printf "websites\nedit\nmonitors\ntodoist" | rofi -dmenu | xargs $bookmarks
     else
