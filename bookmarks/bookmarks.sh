@@ -9,40 +9,43 @@ edit=~/dotfiles/bookmarks/edit
 
 #TODO command bookmars? docs from org / obsidian? / greenclip
 case "$1" in
-    websites)
-        cat -n $websites \
-            | rofi -dmenu \
-            | cut -d \; -f 2 \
-            | (xargs -r -0 firefox && swaymsg workspace 10)
+websites)
+    cat -n $websites |
+        rofi -dmenu |
+        cut -d \; -f 2 |
+        (xargs -r -0 firefox && swaymsg workspace 10)
 
-        ;;
+    ;;
 
-    edit)
-        cat -n $edit \
-            | rofi -dmenu \
-            | cut -d \; -f 2 \
-            | xargs -r -0 -I % sh -c 'emacsclient -e "(+workspace/new)" | emacsclient -n %' && swaymsg workspace 1
+edit)
+    cat -n $edit |
+        rofi -dmenu |
+        cut -d \; -f 2 |
+        xargs -r -0 -I % sh -c 'emacsclient -e "(+workspace/new)" | emacsclient -n %' && swaymsg workspace 1
 
-        ;;
-    monitors)
-         $monitors \
-            | rofi -dmenu \
-            | (xargs ~/dotfiles/bookmarks/monitors.sh)
+    ;;
+monitors)
+    $monitors |
+        rofi -dmenu |
+        (xargs ~/dotfiles/bookmarks/monitors.sh)
 
-        ;;
+    ;;
 
-    todoist)
-         $todoist \
-            | rofi -dmenu \
-            | (xargs ~/dotfiles/bookmarks/todoist.sh)
+todoist)
+    $todoist |
+        rofi -dmenu |
+        (xargs ~/dotfiles/bookmarks/todoist.sh)
 
-        ;;
-    tools)
+    ;;
+tools) ;;
 
-        ;;
+\
     *)
+    if [ -x "$(command -v todoist)" ]; then
         printf "websites\nedit\nmonitors\ntodoist" | rofi -dmenu | xargs $bookmarks
+    else
+        printf "websites\nedit\nmonitors" | rofi -dmenu | xargs $bookmarks
+    fi
 
-        ;;
-
+    ;;
 esac
