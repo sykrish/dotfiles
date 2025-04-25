@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 bookmarks=~/dotfiles/bookmarks/bookmarks.sh
 websites=~/dotfiles/bookmarks/websites
