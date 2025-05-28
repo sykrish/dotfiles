@@ -249,7 +249,7 @@ schemes:
       white:   '#dfdfdf'
       #
   ### Doom One Dark ###
-  DoomOne: &DoomOneDark
+  DoomOneDark: &DoomOneDark
     primary:
       foreground: '#bbc2cf'
     cursor:
@@ -699,7 +699,7 @@ schemes:
         cyan:    '0x54ced6'
         white:   '0xedfdfd'
 
-  DoomOne: &Spacemacs
+  Spaceemacs: &Spacemacs
     primary:
       foreground: '#afafbf'
     cursor:
