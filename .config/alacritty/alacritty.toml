@@ -1,0 +1,161 @@
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "PasteSelection"
+key = "Insert"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Plus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Paste"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Copy"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ClearLogNotice"
+key = "L"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\f"
+key = "L"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mode = "~Alt"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mode = "~Alt"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mode = "~Alt"
+mods = "Shift"
+
+[colors.bright]
+black = "#666666"
+blue = "#66d9ef"
+cyan = "#a1efe4"
+green = "#a6e22e"
+magenta = "#ae81ff"
+red = "#f92672"
+white = "#f8f8f0"
+yellow = "#fd971f"
+
+[colors.cursor]
+cursor = "#528bff"
+text = "#000000"
+
+[colors.normal]
+black = "#0f0f0f"
+blue = "#6a9fb5"
+cyan = "#5f9182"
+green = "#8eb33b"
+magenta = "#a074c4"
+red = "#c75646"
+white = "#dddddd"
+yellow = "#d0b03c"
+
+[colors.primary]
+foreground = "#afafbf"
+
+[colors.selection]
+background = "#dddddd"
+text = "#1f1f1f"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+normal = { family = "consolas", style = "Regular"}
+size = 12.0
+glyph_offset = { x = 0, y = 0 }
+
+
+[font.bold]
+style = "Bold"
+
+[font.bold_italic]
+style = "Bold Italic"
+
+[font.italic]
+style = "Italic"
+
+[font.offset]
+x = 1
+y = 0
+
+[scrolling]
+history = 5000
+
+[window]
+dynamic_padding = false
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 30
+y = 20
+
+[window.position]
+x = 550
+y = 450
+
+[keyboard]
