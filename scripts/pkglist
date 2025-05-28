@@ -9,6 +9,7 @@ dunst
 fontconfig
 fonts-font-awesome 
 fzf
+git
 grim
 grimshot
 i3blocks
@@ -52,4 +53,6 @@ libxpm-dev
 libxrender-dev
 libxt-dev
 ripgrep
+stow
 texinfo
+unzip

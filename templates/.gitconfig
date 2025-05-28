@@ -23,7 +23,7 @@
 	changes = show --stat --oneline
   sstash = stash show
 [commit]
-	template = #GITMESSAGE
+	#template = #GITMESSAGE
 [pager]
   log = true
 	branch = false
