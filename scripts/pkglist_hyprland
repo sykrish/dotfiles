@@ -10,3 +10,9 @@ hyprpicker
 hyprsunset
 hyprutils
 hyprwayland-scanner
+
+cmake
+meson
+cpio
+pkg-config
+gcc
