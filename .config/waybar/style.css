@@ -1,33 +1,40 @@
 @import url('../../.cache/wal/colors-waybar.css');
 
 * {
-    font-size:15px;
+    font-size:17px;
     /* font-family: "CodeNewRoman Nerd Font Propo"; */
-    font-family: "CodeNewRoman Nerd Font Propo";
+    /* font-family: "CodeNewRoman Nerd Font Propo"; */
+    font-family: "Fira Code";
 }
 window#waybar{
     all:unset;
+    background: alpha(@background, .55);
 }
 .modules-left {
-    padding:7px;
-    margin:5px;
-    border-radius:10px;
-    background: alpha(@background,.5);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+    /* padding:5px; */
+    padding-right: 15px;
+    padding-left: 0px;
+    margin:-1px;
+    border-radius:10px 40px 40px 10px;
+    background: alpha(@background, .7);
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, .25);
 }
 .modules-center {
-    padding:7px;
-    margin:5px;
-    border-radius:10px;
-    background: alpha(@background,.5);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+    /* padding:7px; */
+    padding-left: 15px;
+    padding-right: 15px;
+    /* margin:5px; */
+    border-radius:40px;
+    background: alpha(@background, .7);
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, .25);
 }
 .modules-right {
-    padding:7px;
-    margin:5px;
-    border-radius:10px;
-    background: alpha(@background,.5);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+    /* padding:5px; */
+    padding-left:15px;
+    /* margin:5px; */
+    border-radius: 40px 10px 10px 40px;
+    background: alpha(@background, .7);
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, .25);
 }
 tooltip {
     background:@background;
@@ -35,12 +42,12 @@ tooltip {
 }
 #clock:hover, #custom-pacman:hover, #custom-notification:hover,#bluetooth:hover,#network:hover,#battery:hover, #cpu:hover,#memory:hover,#temperature:hover{
     transition: all .3s ease;
-    color:@color9;
+    color:@color2;
 }
 #custom-notification {
     padding: 0px 5px;
     transition: all .3s ease;
-    color:@color7;
+    color:@color11;
 }
 #clock{
     padding: 0px 5px;
@@ -50,42 +57,50 @@ tooltip {
 #custom-pacman{
     padding: 0px 5px;
     transition: all .3s ease;
-    color:@color7;
+    color:@color11;
 
 }
 #workspaces {
-    padding: 0px 5px;
+    padding: 0px 2px;
 }
 #workspaces button {
     all:unset;
-    padding: 0px 5px;
-    color: alpha(@color9,.4);
-    transition: all .2s ease;
+    padding: 5px;
+    color: alpha(@color5,.6);
+    transition: all .9s ease;
 }
 #workspaces button:hover {
-    color:rgba(0,0,0,0);
+    /* color:rgba(0,0,0,0); */
+    /* color: @color8; */
+    color: rgba(255, 101, 118, 1);
     border: none;
     text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
-    transition: all 1s ease;
+
+    background: @color2;
+    /* transition: all 1s ease; */
 }
 #workspaces button.active {
-    color: @color9;
+    color: alpha(@color3, 1);
     border: none;
+    background: alpha(@color4, .3);
     text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
 }
+#workspaces button.active:hover {
+    color: alpha(@color3, 1);
+}
 #workspaces button.empty {
-    color: rgba(0,0,0,0);
+    color: rgba(255,255,128, .3);
     border: none;
     text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .2);
 }
 #workspaces button.empty:hover {
-    color: rgba(0,0,0,0);
+    color: rgba(235, 141, 148, 1);
     border: none;
     text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
-    transition: all 1s ease;
+    /* transition: all 1s ease; */
 }
 #workspaces button.empty.active {
-    color: @color9;
+    color: rgba(100, 235, 50, 1);
     border: none;
     text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
 }
@@ -130,12 +145,13 @@ tooltip {
 }
 #custom-expand{
     padding: 0px 5px;
-    color:alpha(@foreground,.2);
+    color: alpha(@color3, .6);
     text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
     transition: all .3s ease;
 }
 #custom-expand:hover{
-    color:rgba(255,255,255,.2);
+    /* color:rgba(255,255,255,.2); */
+    color: alpha(@color3, 1);
     text-shadow: 0px 0px 2px rgba(255, 255, 255, .5);
 }
 #custom-colorpicker{

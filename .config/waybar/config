@@ -3,7 +3,7 @@
         "position": "top",
         "reload_style_on_change": true,
         "modules-left": ["hyprland/workspaces", "custom/pacman"],
-        "modules-center": ["clock"],
+        "modules-center": ["clock", "custom/weather"],
         "modules-right": ["tray", "group/expand","network"],
         "hyprland/workspaces": {
             "persistent-workspaces": {
@@ -11,14 +11,15 @@
                 "DP-3": [ 6, 7, 8, 9 ]
             }
         },
-        "custom/notification": {
-            "tooltip": false,
-            "format": "",
-            "on-click": "swaync-client -t -sw",
-            "escape": true
+        "custom/weather": {
+            "format": "☀️ {text}",
+            "exec": "~/dotfiles/scripts/hyprland/weather_short.sh",
+            "on-click": "alacritty --class alacritty-weather -o 'font.size=10' -o 'window.dimensions.columns=10' -o 'window.dimensions.lines=10' -e ~/dotfiles/scripts/hyprland/weather_full.sh; pkill -SIGRTMIN+8 waybar",
+            "signal": 8,
+            "interval": "3600"
         },
         "clock": {
-            "format": "{:%H:%M | %d-%M-%Y } ",
+            "format": "{:%H:%M  %d-%M-%Y } ",
             "interval": 1,
             "tooltip-format": "<tt>{calendar}</tt>",
             "on-click": "~/dotfiles/scripts/hyprland/kill_calendar.sh && alacritty --class calendar -T calendar -e calcure",
@@ -37,7 +38,7 @@
             "on-click": "kitty nmtui"
         },
         "custom/pacman": {
-            "format": "󰅢 {}",
+            "format": "󰅢 {text}",
             "interval": 30,
             "exec": "~/dotfiles/scripts/hyprland/check_pacman_updates.sh",
             "exec-if": "exit 0",
