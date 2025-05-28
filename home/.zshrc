@@ -122,5 +122,8 @@ if [ -f $HOME/.alias ]; then source $HOME/.alias; fi
 
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
+export DOTFILES=/home/stefan/dotfiles
+source /home/stefan/dotfiles/.alias
