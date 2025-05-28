@@ -11,8 +11,10 @@ install() {
   # Ensure file exists
   touch $ZSHRC
 
+  . scripts/init.sh
   info "Installing zsh"
-  sudo apt install zsh -y
+  #sudo apt install zsh -y
+  sudo $PACKAGE_MANAGER $INSTALL_FLAGS zsh -y
 
   print "Installing oh my zash"
   RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
