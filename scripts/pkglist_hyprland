@@ -10,9 +10,14 @@ hyprpicker
 hyprsunset
 hyprutils
 hyprwayland-scanner
+wlogout
+
+swaync
+python-pywal
 
 cmake
 meson
 cpio
 pkg-config
 gcc
+

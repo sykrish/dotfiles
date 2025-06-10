@@ -18,6 +18,7 @@ libgstreamer1.0-dev
 libncurses5-dev
 libpam0g-dev
 libssl-dev
+libnotify
 libx11-dev
 libxcb-xkb-dev
 libxrandr-dev
@@ -28,12 +29,15 @@ ranger
 redshift
 rofi
 silversearcher-ag
+the_silver_searcher
 slurp
 stow
 sway
 swayidle
+swaync
 vim
-wofi 
+wofi
+wl-clipboard
 
 # Emacs dependencies
 build-essential
