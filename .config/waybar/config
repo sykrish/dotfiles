@@ -16,10 +16,10 @@
             "exec": "~/dotfiles/scripts/hyprland/weather_short.sh",
             "on-click": "alacritty --class alacritty-weather -o 'font.size=10' -o 'window.dimensions.columns=10' -o 'window.dimensions.lines=10' -e ~/dotfiles/scripts/hyprland/weather_full.sh; pkill -SIGRTMIN+8 waybar",
             "signal": 8,
-            "interval": "3600"
+            "interval": 3600
         },
         "clock": {
-            "format": "{:%H:%M  %d-%M-%Y } ",
+            "format": "{:%H:%M  %d %b} ",
             "interval": 1,
             "tooltip-format": "<tt>{calendar}</tt>",
             "on-click": "~/dotfiles/scripts/hyprland/kill_calendar.sh && alacritty --class calendar -T calendar -e calcure",
