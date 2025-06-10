@@ -81,6 +81,7 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
+eval "$(ssh-agent -s)"
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -106,11 +107,18 @@ fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+# Not supported in the "fish" shell.
+(cat ~/.cache/wal/sequences &)
+
 # Appended by install script.
 if [ -f $HOME/.env_vars ]; then source $HOME/.env_vars; fi
 if [ -f $HOME/.alias ]; then source $HOME/.alias; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && export FZF_PATH="$HOME/.fzf"
 [ -f $HOME/linuxbrew/.linuxbrew/bin/brew ] && eval "$($HOME/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # enable autojump REVIEW probably remove linuxbrew
@@ -127,3 +135,7 @@ export PATH="$HOME/.local/bin:$PATH"
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 export DOTFILES=/home/stefan/dotfiles
 source /home/stefan/dotfiles/.alias
+export DOTFILES=/home/stefan/dotfiles
+source /home/stefan/dotfiles/.alias
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

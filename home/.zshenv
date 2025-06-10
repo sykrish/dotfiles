@@ -8,4 +8,9 @@ export ZSH="/Users/$USER/.oh-my-zsh"
 export EDITOR='nvim'
 export PAGER='less'
 
+export XDG_CONFIG_HOME="$HOME/.config"
+export USER_CONFIG="$HOME/.config"
+export HYPR_CONFIG_DIR="$USER_CONFIG/hypr/"
+export HYPR_CONFIG="$HYPR_CONFIG_DIR/hyprland.conf"
+
 [ -f $HOME/.env.local ] && . "$HOME/.env.local"
