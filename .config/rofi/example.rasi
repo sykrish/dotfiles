@@ -1,0 +1,12 @@
+/*****----- Global Properties -----*****/
+@import                          "colors.rasi"
+
+* {
+    border-colour:               var(selected);
+    background-colour:           var(background-transparent);
+    foreground-colour:           var(foreground);
+    alternate-background:        var(selected);
+	alternate-foreground:		 var(background);
+
+    font:                        "JetBrains Mono Nerd Font 10";
+}
