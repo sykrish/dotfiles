@@ -1,7 +1,7 @@
 @import url('../../.cache/wal/colors-waybar.css');
 
 * {
-    font-size:17px;
+    font-size:12px;
     /* font-family: "CodeNewRoman Nerd Font Propo"; */
     /* font-family: "CodeNewRoman Nerd Font Propo"; */
     font-family: "Fira Code";
@@ -129,6 +129,10 @@ tooltip {
 
 #battery.warning:not(.charging) {
     color: #ffbe61;
+}
+
+#custom-volume.MUTED {
+    color: #f53c3c;
 }
 
 #battery.critical:not(.charging) {
